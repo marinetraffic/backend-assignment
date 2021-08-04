@@ -1,0 +1,59 @@
+name: Tests
+on:
+  push:
+    branches:
+      - master
+  pull_request: ~
+jobs:
+  build:
+    env:
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      APP_ENV: testing
+    name: Test Suite
+    runs-on: ubuntu-20.04
+    services:
+      mysql:
+        image: mysql
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - uses: actions/checkout@v2
+      - uses: symfonycorp/security-checker-action@v2
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8
+          extensions: mbstring, xml, hash, ctype, iconv, curl, pcov, pdo_mysql
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+      - name: Install Composer dependencies
+        run: composer install -n && cp .env.example .env
+      - name: Validate composer.lock
+        run: composer validate --strict
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Lint files
+        run: vendor/bin/parallel-lint app tests routes database config public
+      - name: Run Tests
+        run: vendor/bin/phpunit --log-junit test-reports/phpunit.xml
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v2
+        if: always()
+        with:
+          check_name: 'PHPUnit test results'
+          report_paths: 'test-reports/phpunit.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Phpstan
+        run: vendor/bin/phpstan --no-progress --memory-limit=1G
