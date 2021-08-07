@@ -1,7 +1,6 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->name('*.php')
     ->in(__DIR__)
     ->path([
         'app',
@@ -10,11 +9,13 @@ $finder = PhpCsFixer\Finder::create()
         'routes',
         'tests',
     ])
+    ->name('*.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true)
 ;
 
 $config = new PhpCsFixer\Config();
+$config->setRiskyAllowed(true);
 return $config->setRules([
     '@PSR12' => true,
     '@Symfony'                        => true,
@@ -31,6 +32,12 @@ return $config->setRules([
     'simplified_null_return'          => true,
     'yoda_style'                      => false,
     'php_unit_method_casing'          => 'camel_case',
+    'binary_operator_spaces'          => [
+        'operators' => [
+            '='  => 'align_single_space_minimal',
+            '=>' => 'align_single_space_minimal',
+        ],
+    ],
 ])
     ->setFinder($finder)
     ;

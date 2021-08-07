@@ -32,3 +32,8 @@ Fields supplied are:
 * Fork this repo and create a pull request that contains your implementation in a new branch named after you.
 
 **Have fun!**
+
+---
+# Docs
+- [Setting up (Installation)](docs/Setup.md)
+- [Vessels Tracks](docs/VesselTracks.md)
