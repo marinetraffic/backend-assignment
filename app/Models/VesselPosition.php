@@ -54,6 +54,7 @@ class VesselPosition extends Model
      * @var array
      */
     protected $hidden = [
+        self::FIELD_ID,
         self::FIELD_CREATED_AT,
         self::FIELD_UPDATED_AT,
     ];
