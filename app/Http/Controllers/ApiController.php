@@ -30,8 +30,29 @@ class ApiController extends Controller
         {
             return response()->xml($data->toArray(), "vessel");
         }
-        //return json for all other content type
-        return  response()->json($data);
+
+        if( $accept === 'text/csv' )
+        {
+            return response()->csv($data->toArray());
+        }
+
+        if( $accept === 'application/vnd.api+json' )
+        {
+            return response()->json($data->toArray())->header('Content-Type', 'application/vnd.api+json');
+        }
+
+        if( $accept === 'application/ld+json' )
+        {
+            return response()->jsonLd($data->toArray())->header('Content-Type', 'application/ld+json');
+        }
+
+        if( $accept === 'application/json' )
+        {
+            return response()->jsonLd($data->toArray())->header('Content-Type', 'application/ld+json');
+        }
+
+        //return default
+        return  response()->json($data->toArray());
 
     }
 
