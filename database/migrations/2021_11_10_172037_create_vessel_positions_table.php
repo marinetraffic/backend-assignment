@@ -24,7 +24,7 @@ class CreateVesselPositionsTable extends Migration
             $table->float('lat', 8, 5);
             $table->integer("course");
             $table->integer("heading");
-            $table->string("rot");
+            $table->integer("rot");
             $table->integer("timestamp");
 
             $table->timestamps();
