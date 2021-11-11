@@ -21,7 +21,18 @@ class ApiController extends Controller
 
     public function index(Request $request){
         $filters = $this->processRequestParams($request->all());
-        return  response()->json($this->repository->matching($filters));
+
+        $data = $this->repository->matching($filters);
+
+        $accept = request()->header('accept');
+
+        if( $accept === 'application/xml' )
+        {
+            return response()->xml($data->toArray(), "vessel");
+        }
+        //return json for all other content type
+        return  response()->json($data);
+
     }
 
     private function processRequestParams(array $requestParams){
