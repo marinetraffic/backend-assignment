@@ -38,7 +38,7 @@ class ApiController extends Controller
 
     /**
      * Display the specified resource.
-     *  GET vesseltracking.dev/vessel/1
+     *  GET 127.0.0.1:8000/api/247039300
      * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -47,13 +47,11 @@ class ApiController extends Controller
     //instead of $vessel = Vessel::findOrFail($id);
     public function show($id)
     {
-        //If the vessel does not exist we will have an exception with
-        //findOrFail
-        //other with find need to be handled with a different condition
-        $vessel = Vessel::findOrFail($id);
+        $vessel = Vessel::all();
 
-        //return all the vessels as a json response
-        // return response()->json(['vessel_data' => $vessels], 200);
-        return $this->showOne($vessel, 200);
+        //If the vessel does not exist we will have an exception with
+        $vessel = $vessel->where('mmsi', $id);
+
+        return response()->json(['vessel_data' => $vessel], 200);
     }
 }
