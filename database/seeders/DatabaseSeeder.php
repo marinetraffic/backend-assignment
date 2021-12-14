@@ -2,17 +2,36 @@
 
 namespace Database\Seeders;
 
+use App\Models\Vessel;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds by reading from ship_positions.json
      *
      * @return void
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Vessel::truncate();
+
+        $json = File::get("ship_positions.json");
+        $shipPositions = json_decode($json);
+        foreach ($shipPositions as $key => $shipPosition) {
+            Vessel::create([
+                Vessel::FIELD_MMSI => $shipPosition->mmsi,
+                Vessel::FIELD_STATUS => $shipPosition->status,
+                Vessel::FIELD_STATION_ID => $shipPosition->stationId,
+                Vessel::FIELD_SPEED => $shipPosition->speed,
+                Vessel::FIELD_LON => $shipPosition->lon,
+                Vessel::FIELD_LAT => $shipPosition->lat,
+                Vessel::FIELD_COURSE => $shipPosition->course,
+                Vessel::FIELD_HEADING => $shipPosition->heading,
+                Vessel::FIELD_ROT => $shipPosition->rot,
+                Vessel::FIELD_TIMESTAMP => $shipPosition->timestamp,
+            ]);
+        }
     }
 }
