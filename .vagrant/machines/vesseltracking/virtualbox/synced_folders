@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/vesseltracking":{"type":null,"mount_options":["uid=1000","gid=1000","_netdev"],"guestpath":"/home/vagrant/vesseltracking","hostpath":"D:/ReposII/Marine_Traffic/backend-assignment","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/ReposII/Marine_Traffic/backend-assignment","disabled":false,"__vagrantfile":true}}}
