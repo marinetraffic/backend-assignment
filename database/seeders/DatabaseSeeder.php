@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Vessel;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +17,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Vessel::truncate();
+        // User::truncate();
+        // Vessel::truncate();
+        // DB::table('vessels')->truncate();
 
         $json = File::get("ship_positions.json");
         $shipPositions = json_decode($json);

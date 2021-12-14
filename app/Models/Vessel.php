@@ -14,7 +14,7 @@ class Vessel extends Model
     //  * we need to tell laravel to use this specific table right now 
     //  * and not the table that it is guessing
     //  */
-    // protected $table = 'vessel';
+    // protected $table = 'vessels';
 
     /**
      * table vessel field names

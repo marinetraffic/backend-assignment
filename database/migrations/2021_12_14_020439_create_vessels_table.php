@@ -24,7 +24,7 @@ class CreateVesselsTable extends Migration
             $table->float('lat', 8, 5);
             $table->integer("course");
             $table->integer("heading");
-            $table->integer("rot");
+            $table->string("rot"); //string, due to Illuminate\Database\QueryException  SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'rot' at row 1 
             $table->integer("timestamp");
 
             $table->timestamps();
