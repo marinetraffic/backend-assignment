@@ -41,7 +41,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            'throttle:60,1', //set limit 10 requests per/hour
+            'throttle:60,1', //Limit requests per user to 10/hour. (Use the request remote IP as a user identifier)
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
