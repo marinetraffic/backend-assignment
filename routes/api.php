@@ -19,6 +19,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 /**
- * User
+ * vessel
  */
-Route::resource('vessel', 'Vessel\VesselController', ['except' => ['create', 'edit']]);
+Route::resource('api', 'ApiController');
