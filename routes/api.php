@@ -21,4 +21,4 @@ use Illuminate\Support\Facades\Route;
 /**
  * vessel
  */
-Route::resource('api', 'ApiController', ['only' => ['index', 'show']]);
+Route::resource('api', 'ApiController'); //, ['only' => ['index', 'show']]

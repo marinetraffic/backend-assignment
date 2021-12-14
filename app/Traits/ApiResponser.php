@@ -39,25 +39,25 @@ trait ApiResponser
      */
     private function successResponse($data, $code)
     {
-        Log::info(response()->json($data, $code));
+        // Log::info(response()->json($data, $code));
         return response()->json($data, $code);
     }
 
     protected function errorResponse($message, $code)
     {
-        Log::error(response()->json(['error' => $message, 'code' => $code], $code));
+        // Log::error(response()->json(['error' => $message, 'code' => $code], $code));
         return response()->json(['error' => $message, 'code' => $code], $code);
     }
 
     protected function showAll(Collection $collection, $code = 200)
     {
-        Log::info(response()->json(['data_collection' => $collection], $code));
+        // Log::info(response()->json(['data_collection' => $collection], $code));
         return response()->json(['data_collection' => $collection], $code);
     }
 
     protected function showOne(Model $model, $code)
     {
-        Log::info(response()->json(['data_collection' => $model], $code));
+        // Log::info(response()->json(['data_collection' => $model], $code));
         return response()->json(['data_model' => $model], $code);
     }
 }
