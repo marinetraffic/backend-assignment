@@ -45,8 +45,10 @@ class ApiController extends Controller
      */
     //public function show(Vessel $vessel)   <- After Laravel 5.2Using The Laravel Implicit Model Binding for Some Methods
     //instead of $vessel = Vessel::findOrFail($id);
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        Log::info('Request IP: ' . json_encode($request->getClientIp()) . "\n");
+
         $vessel = Vessel::all();
 
         //If the vessel does not exist we will have an exception with
