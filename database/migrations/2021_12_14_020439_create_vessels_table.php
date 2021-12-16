@@ -20,8 +20,8 @@ class CreateVesselsTable extends Migration
             $table->smallInteger("status");
             $table->integer("stationId");
             $table->integer("speed");
-            $table->float('lon', 8, 5);
-            $table->float('lat', 8, 5);
+            $table->double('lon');
+            $table->double('lat');
             $table->integer("course");
             $table->integer("heading");
             $table->string("rot"); //string, due to Illuminate\Database\QueryException  SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'rot' at row 1 

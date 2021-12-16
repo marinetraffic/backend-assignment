@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Vessel;
 
 /**
- * We need to use the Trait ApiResponser in ApiController
+ * We need to use the Trait ApiResponser in VesselController
  * doing that we can use the trait directly in all other controllers
  * since they are extended
  */
-class ApiController extends Controller
+class VesselController extends Controller
 {
     use ApiResponser; //we can use every trait method directly in our Controllers
 
@@ -31,9 +31,9 @@ class ApiController extends Controller
         Log::info('Request IP: ' . json_encode($request->getClientIp()) . "\n");
 
         //return all the vessels as a json response
-        //return response()->json(['vessels_data' => $vessels], 200);
+        return response()->json(['vessels_data_all' => $vessels], 200);
         //Or using traits
-        return $this->showAll($vessels);
+        // return $this->showAll($vessels);
     }
 
     /**
@@ -49,11 +49,17 @@ class ApiController extends Controller
     {
         Log::info('Request IP: ' . json_encode($request->getClientIp()) . "\n");
 
+        Log::info('$id: ' . $request->getUri() . "\n");
+
+        // Log::info('$id: ' . $request->getHost() . "\n");
+        //[2021-12-15 16:59:53] local.INFO: $id: vesseltracking.dev
         $vessel = Vessel::all();
 
         //If the vessel does not exist we will have an exception with
-        $vessel = $vessel->where('mmsi', $id);
+
+        $vessel = $vessel->where('timestamp', $id);
 
         return response()->json(['vessel_data' => $vessel], 200);
+        //return $this->showOne($vessel, 200);
     }
 }
