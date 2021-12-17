@@ -14,13 +14,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+/**
+ * vessel's mmsi
+ */
+Route::resource('mmsi', 'Vesse_mmsi_Controller', ['only' => ['show']]);
 
 /**
- * vessel
+ * vessel's longitude
  */
-Route::resource('vessel', 'VesselController'); //, ['only' => ['index', 'show']]
+Route::resource('lon', 'Vessel_lon_Controller', ['only' => ['show']]);
 
-// Route::resource('api', 'ApiController');
+/**
+ * vessel's latitude
+ */
+Route::resource('lat', 'Vessel_lat_Controller', ['only' => ['show']]);
+
+/**
+ * vessel's timestamp
+ */
+Route::resource('time', 'Vessel_time_Controller', ['only' => ['show']]);
+
+/**
+ *  Csrf token
+ * 
+ * TO DO
+ */
+// Route::get('/token', function (Request $request) {
+//     $token = $request->session()->token();
+
+//     $token = csrf_token();
+
+//     // ...
+// });

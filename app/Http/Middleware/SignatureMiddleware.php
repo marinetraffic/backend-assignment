@@ -21,9 +21,17 @@ class SignatureMiddleware
      */
     public function handle($request, Closure $next, $headerName = 'X-Name')
     {
-        $response = $next($request);
+        /**
+         * Adding Access-Control-Allow-Origin header response
+         */
+        $response = $next($request)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
-        //APP_NAME=ParaskevakosRestApi at .env
+        /**
+         * Add header signature
+         * based on APP_NAME=ParaskevakosRestApi
+         */
         $response->headers->set($headerName, config('app.name'));
 
         return $response;
