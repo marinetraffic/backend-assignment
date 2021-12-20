@@ -30,6 +30,8 @@ class Vessel_lon_Controller extends Controller
 
         $vessel = $vessel->where('lon', $lon);
 
-        return response()->json(['data_by_lon' => $vessel], 200);
+        return response()
+            ->make(['data_by_lon' => $vessel], 200)
+            ->header('Content-Type', $this->getRequestContentType($request));
     }
 }

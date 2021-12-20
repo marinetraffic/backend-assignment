@@ -30,6 +30,7 @@ namespace App\Traits;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
 trait ApiResponser
 {
@@ -59,5 +60,23 @@ trait ApiResponser
     {
         // Log::info(response()->json(['data_collection' => $model], $code));
         return response()->json(['data_model' => $model], $code);
+    }
+
+    protected function getRequestContentType(Request $request)
+    {
+        $requestContentType = json_encode($request->headers->get('Content-Type'));
+        $setContentResponse = null;
+
+        if (strpos($requestContentType, 'vnd.api+json') !== false) {
+            $setContentResponse = 'application/vnd.api+json';
+        } else if (strpos($requestContentType, 'csv') !== false) {
+            $setContentResponse = 'text/csv';
+        } else if (strpos($requestContentType, 'xml') !== false) {
+            $setContentResponse = 'application/xml';
+        } else {
+            //default
+            $setContentResponse = 'application/json';
+        }
+        return $setContentResponse;
     }
 }

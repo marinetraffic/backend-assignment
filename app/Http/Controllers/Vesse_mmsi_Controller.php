@@ -30,7 +30,11 @@ class Vesse_mmsi_Controller extends Controller
 
         $vessel = $vessel->where('mmsi', $mmsi);
 
-        return response()->json(['data_by_mmsi' => $vessel], 200);
+        return response()
+            ->make(['data_by_mmsi' => $vessel], 200)
+            ->header('Content-Type', $this->getRequestContentType($request));
+
+        // return response()->json(['data_by_mmsi' => $vessel], 200);
     }
     /**
      * 
@@ -63,6 +67,8 @@ class Vesse_mmsi_Controller extends Controller
 
         $vessel = $vessel->whereIn('mmsi', $mmsi);
 
-        return response()->json(['data_by_mmsi' => $vessel], 200);
+        return response()
+            ->make(['data_by_mmsi' => $vessel], 200)
+            ->header('Content-Type', $this->getRequestContentType($request));
     }
 }

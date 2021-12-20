@@ -30,7 +30,9 @@ class Vessel_time_Controller extends Controller
 
         $vessel = $vessel->where('timestamp', $time);
 
-        return response()->json(['data_by_time' => $vessel], 200);
+        return response()
+            ->make(['data_by_time' => $vessel], 200)
+            ->header('Content-Type', $this->getRequestContentType($request));
     }
     /**
      * 
@@ -61,6 +63,8 @@ class Vessel_time_Controller extends Controller
 
         $vessel = $vessel->whereBetween('timestamp', array($timeFrom, $timeTo));
 
-        return response()->json(['data_by_time' => $vessel], 200);
+        return response()
+            ->make(['data_by_time' => $vessel], 200)
+            ->header('Content-Type', $this->getRequestContentType($request));
     }
 }

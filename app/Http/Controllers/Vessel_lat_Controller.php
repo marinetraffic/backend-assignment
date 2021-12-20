@@ -30,6 +30,8 @@ class Vessel_lat_Controller extends Controller
 
         $vessel = $vessel->where('lat', $lat);
 
-        return response()->json(['data_by_lat' => $vessel], 200);
+        return response()
+            ->make(['data_by_lat' => $vessel], 200)
+            ->header('Content-Type', $this->getRequestContentType($request));
     }
 }
