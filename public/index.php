@@ -43,6 +43,15 @@ require __DIR__.'/../vendor/autoload.php';
 | to this client's browser, allowing them to enjoy our application.
 |
 */
+// include("./test/test.html");
+// echo '<head>
+//     <script src="./test/jquery-3.6.0.min.js"></script>
+//     <script src="./test/testEndpoints.js"></script>
+//     </head>';
+
+// echo '<script type="text/javascript">',
+// 'getMMSIRestData()',
+// '</script>';
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
