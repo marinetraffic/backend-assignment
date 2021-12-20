@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
         'api' => [
             'signature:X-VesselsTracksAPI',
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            'throttle:100,600', //Limit requests per user to 10/hour. (Use the request remote IP as a user identifier)
+            'throttle:10,60', //Limit requests per user to 10calls/60minutes. (Use the request remote IP as a user identifier)
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];

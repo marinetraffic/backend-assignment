@@ -24,7 +24,7 @@ class Vessel_lat_Controller extends Controller
     {
         Log::info('Request IP: ' . json_encode($request->getClientIp()) . "\n");
 
-        Log::info('$lat: ' . $request->getUri() . "\n");
+        Log::info('$getUri: ' . $request->getUri() . "\n");
 
         $vessel = Vessel::all();
 

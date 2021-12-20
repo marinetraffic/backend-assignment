@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * vessel's mmsi
  */
-Route::resource('mmsi', 'Vesse_mmsi_Controller', ['only' => ['show']]);
+Route::resource('mmsi', 'Vesse_mmsi_Controller', ['only' => ['show', 'store']]);
 
 /**
  * vessel's longitude
@@ -32,7 +32,8 @@ Route::resource('lat', 'Vessel_lat_Controller', ['only' => ['show']]);
 /**
  * vessel's timestamp
  */
-Route::resource('time', 'Vessel_time_Controller', ['only' => ['show']]);
+Route::resource('time', 'Vessel_time_Controller', ['only' => ['show', 'store']]);
+
 
 /**
  *  Csrf token
