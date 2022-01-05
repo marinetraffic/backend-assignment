@@ -15,4 +15,5 @@ use \App\Http\Controllers\PositionController;
 |
 */
 
-Route::get('positions', [PositionController::class, 'index'])->name('positions');
+Route::get('positions', [PositionController::class, 'index'])->middleware(['throttle:ip_address', 'request.logging'])
+    ->name('positions');

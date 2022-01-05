@@ -52,4 +52,9 @@ $response = $kernel->handle(
     $request = Request::capture()
 )->send();
 
+if (isset($request->hooksLogger)) {
+    $request->hooksLogger->info('Outgoing Response:');
+    $request->hooksLogger->info($response);
+}
+
 $kernel->terminate($request, $response);
