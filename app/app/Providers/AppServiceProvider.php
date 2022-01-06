@@ -28,13 +28,4 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
-
-    protected function configureRateLimiting()
-    {
-        RateLimiter::for('ip_address', function (Request $request) {
-            return Limit::perMinute(10)->by($request->ip())->response(function() {
-                return response('Your return message', 429);
-            });
-        });
-    }
 }

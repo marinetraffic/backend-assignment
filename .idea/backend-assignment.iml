@@ -119,6 +119,27 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/spatie/array-to-xml" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/mtownsend/response-xml" />
+      <excludeFolder url="file://$MODULE_DIR$/app/storage" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/myclabs/php-enum" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/maennchen/zipstream-php" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/markbaker/complex" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/markbaker/matrix" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/phpoffice/phpspreadsheet" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/core" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/eloquent" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/encoder-neomerx" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/exceptions" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/laravel" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/neomerx-json-api" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/spec" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/validation" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/cloudcreativity/json-api-testing" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/testing" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/spatie/schema-org" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

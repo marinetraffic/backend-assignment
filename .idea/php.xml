@@ -113,9 +113,29 @@
       <path value="$PROJECT_DIR$/app/vendor/psr/container" />
       <path value="$PROJECT_DIR$/app/vendor/psr/event-dispatcher" />
       <path value="$PROJECT_DIR$/app/vendor/composer" />
+      <path value="$PROJECT_DIR$/app/vendor/spatie/array-to-xml" />
+      <path value="$PROJECT_DIR$/app/vendor/mtownsend/response-xml" />
+      <path value="$PROJECT_DIR$/app/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/app/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/app/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/app/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/app/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/app/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/app/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/core" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/eloquent" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/encoder-neomerx" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/exceptions" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/laravel" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/neomerx-json-api" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/spec" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/validation" />
+      <path value="$PROJECT_DIR$/app/vendor/cloudcreativity/json-api-testing" />
+      <path value="$PROJECT_DIR$/app/vendor/laravel-json-api/testing" />
+      <path value="$PROJECT_DIR$/app/vendor/spatie/schema-org" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/app/vendor/autoload.php" />
