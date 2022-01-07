@@ -32,6 +32,7 @@ class ApiRequestLogging
         $request->hooksLogger = $this->logger;
         return $next($request);
     }
+
     private function getLogger()
     {
         $dateString = now()->format('m_d_Y');
