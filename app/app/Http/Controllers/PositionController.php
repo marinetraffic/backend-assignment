@@ -6,20 +6,12 @@ use App\Enums\ContentTypes;
 use App\Exports\PositionsExport;
 use App\Http\Requests\PositionRequest;
 use App\Http\Resources\PositionResource;
-use App\Http\Resources\PositionXmlCollection;
-use App\JsonApi\V1\Positions\PositionSchema;
 use App\Models\Position;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use LaravelJsonApi\Core\Responses\DataResponse;
 use Maatwebsite\Excel\Excel;
 use Spatie\ArrayToXml\ArrayToXml;
 use Spatie\SchemaOrg\Graph;
-use Spatie\SchemaOrg\ListItem;
-use Spatie\SchemaOrg\MultiTypedEntity;
-use Spatie\SchemaOrg\Schema;
+
 
 class PositionController extends Controller
 {
@@ -86,7 +78,11 @@ class PositionController extends Controller
 
             return response($graph)->header('Content-Type', ContentTypes::LD);
         }  else {
-            abort(415, 'Invalid Content Type');
+
+            return response()->json( [
+                'message' => 'Invalid Content Types',
+                'code' => 415
+            ],415);
         }
     }
 }

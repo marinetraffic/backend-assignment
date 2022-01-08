@@ -43,8 +43,6 @@ class ImportJsonToDb extends Command
     public function handle()
     {
         try {
-
-
             $filepath = $this->argument('filepath');
 
             $truncate = $this->option('truncate');
