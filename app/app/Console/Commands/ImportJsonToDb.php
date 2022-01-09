@@ -15,7 +15,7 @@ class ImportJsonToDb extends Command
      * @var string
      */
     protected $signature = 'import:file
-                            {filepath : The absolut path of the json file}
+                            {filepath? : The absolut path of the json file}
                             {--truncate : Whether the existing data should be truncated}';
 
     /**
@@ -43,7 +43,13 @@ class ImportJsonToDb extends Command
     public function handle()
     {
         try {
-            $filepath = $this->argument('filepath');
+            $filepath = '';
+
+            if($this->argument('filepath')) {
+                $filepath = $this->argument('filepath');
+            } else {
+                $filepath = "../ship_positions.json";
+            }
 
             $truncate = $this->option('truncate');
 

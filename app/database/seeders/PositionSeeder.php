@@ -13,6 +13,6 @@ class PositionSeeder extends Seeder
      */
     public function run()
     {
-        //
+//
     }
 }

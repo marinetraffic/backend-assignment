@@ -3,10 +3,25 @@
 namespace Tests\Feature;
 
 use App\Enums\ContentTypes;
+use App\Models\Position;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ContentTypeTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected $positions;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('cache:clear');
+
+        $this->positions = Position::factory(100)->create();
+    }
+
     /** @test */
     public function only_allow_acceptable_content_types()
     {

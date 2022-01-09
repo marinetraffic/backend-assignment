@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Enums\ContentTypes;
 use App\Models\Position;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

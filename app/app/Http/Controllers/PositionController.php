@@ -43,6 +43,7 @@ class PositionController extends Controller
         $contentType = $request->header('content_type');
 
         if($contentType == ContentTypes::CSV) {
+
             return (new PositionsExport($query))->download('invoices.csv', Excel::CSV, [
                 'Content-Type' => ContentTypes::CSV,
             ]);

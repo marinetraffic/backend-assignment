@@ -26,7 +26,7 @@ class PositionRequest extends FormRequest
     public function rules()
     {
         $request = request();
-//        dd(request()->all());
+
         return [
             'mmsi' => ['integer'],
             'maxLat' => ['numeric', function ($attribute, $value, $fail) use ($request) {
