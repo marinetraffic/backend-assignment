@@ -1,0 +1,63 @@
+[07.01.2022 - 22:16:26][NOTICE] - Request/vesselApi/index.php/filterBy?mmsi=247039300
+[07.01.2022 - 22:16:35][NOTICE] - Request/vesselApi/index.php/filterBy?mmsi=247039300/xml
+[07.01.2022 - 22:18:39][NOTICE] - Request/vesselApi/index.php/filterBy/xml?mmsi=247039300
+[07.01.2022 - 22:27:05][NOTICE] - Request/vesselApi/index.php/listAll/xml
+[07.01.2022 - 22:35:35][WARNING] - Rate Limit Exceeded  /vesselApi/index.php/listAll/xml
+[07.01.2022 - 22:35:41][WARNING] - Rate Limit Exceeded  /vesselApi/index.php/listAll/xml
+[07.01.2022 - 22:38:00][WARNING] - Rate Limit Exceeded  ::1 /vesselApi/index.php/listAll/xml
+[07.01.2022 - 22:48:14][NOTICE] - REQUEST:/vesselApi/index.php/listAll/xml
+[07.01.2022 - 22:49:30][NOTICE] - REQUEST:/vesselApi/index.php/listAll/xml
+[09.01.2022 - 08:54:57][NOTICE] - REQUEST:/vesselApi/index.php/listAll/xml
+[09.01.2022 - 08:55:02][NOTICE] - REQUEST:/vesselApi/index.php/listAll/xml
+[09.01.2022 - 08:55:44][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?lat_min=42.163880000&lat_max=42.75178
+[09.01.2022 - 08:59:13][NOTICE] - REQUEST:/vesselApi/index.php/listAll/xml
+[09.01.2022 - 09:01:53][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?lat_min=42.163880000&lat_max=42.75178
+[09.01.2022 - 09:08:58][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?lat_min=42.163880000&lat_max=42.75178
+[09.01.2022 - 09:12:23][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?lon_min=15.4415&lon_max=16.020130000
+[09.01.2022 - 09:15:02][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?time_min=1372683960&time_max=1372689900
+[09.01.2022 - 09:17:09][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?time_min=1372683960&time_max=1372689900
+[09.01.2022 - 09:22:59][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+[09.01.2022 - 09:24:09][NOTICE] - REQUEST:/vesselApi/index.php/listAll/json
+[09.01.2022 - 09:24:13][NOTICE] - REQUEST:/vesselApi/index.php/listAll/jsona
+[09.01.2022 - 09:24:19][NOTICE] - REQUEST:/vesselApi/index.php/listAll/jsonap
+[09.01.2022 - 09:25:39][ERROR] - BAD REQUEST:/vesselApi/index.php/listAll/jsonap
+[09.01.2022 - 09:29:40][ERROR] - BAD REQUEST:/vesselApi/index.php/listAl/json
+[09.01.2022 - 09:35:44][ERROR] - BAD REQUEST:/vesselApi/index.php/getVessels/xml?time_min=1372689900&time_max=1372683960
+[09.01.2022 - 09:36:41][ERROR] - BAD REQUEST:/vesselApi/index.php/getVessel/json?mmsi=247039300
+[09.01.2022 - 09:37:42][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mms=247039300
+[09.01.2022 - 09:38:00][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mms=247039300
+[09.01.2022 - 09:38:07][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mm=247039300
+[09.01.2022 - 09:44:08][ERROR] - BAD REQUEST:/vesselApi/index.php//vesselApi/index.php/getVessels/json?lon_min=15.4415
+[09.01.2022 - 09:44:18][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?lon_min=15.4415&lon_max=16.020130000
+[09.01.2022 - 09:44:30][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?lon_min=15.4415
+[09.01.2022 - 09:45:54][ERROR] - BAD REQUEST:/vesselApi/index.php/getVessel/json?mmsi=abc
+[09.01.2022 - 09:47:14][ERROR] - BAD REQUEST:/vesselApi/index.php/getVessel/json?mmsi=SELECT%20*%20FROM%20vesselPosition
+[09.01.2022 - 10:11:04][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+[09.01.2022 - 10:13:34][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+[09.01.2022 - 10:14:44][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+[09.01.2022 - 13:44:44][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+[09.01.2022 - 13:44:46][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+[09.01.2022 - 13:50:54][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+[09.01.2022 - 13:51:13][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300
+[09.01.2022 - 15:04:28][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300
+[09.01.2022 - 15:05:06][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:06:09][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:07:48][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:08:23][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:08:41][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:09:46][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:10:11][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:10:40][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:12:48][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:15:52][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:16:00][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/xml?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:16:08][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/csv?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:16:30][NOTICE] - REQUEST:/vesselApi/index.php/listAll/json
+[09.01.2022 - 15:18:32][NOTICE] - REQUEST:/vesselApi/index.php/listAll/json
+[09.01.2022 - 15:18:53][NOTICE] - REQUEST:/vesselApi/index.php/listAll/json
+[09.01.2022 - 15:18:59][NOTICE] - REQUEST:/vesselApi/index.php/listAll/xml
+[09.01.2022 - 15:19:38][NOTICE] - REQUEST:/vesselApi/index.php/listAll/xml
+[09.01.2022 - 15:19:46][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/csv?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:19:58][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/csv?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:22:30][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/csv?mmsi=247039300&mmsi=311486000
+[09.01.2022 - 15:22:36][NOTICE] - REQUEST:/vesselApi/index.php/getVessels/xml?mmsi=247039300&mmsi=311486000

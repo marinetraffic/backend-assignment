@@ -1,0 +1,102 @@
+/*
+Manual Testing
+vessel Api calls to test 
+*/
+
+
+/*
+	Success tests
+*/
+
+//load all vessel positions from json to db
+./vesselApi/index.php/loadFromJson
+
+
+//show all vessel positions
+./vesselApi/index.php/listAll/json
+./vesselApi/index.php/listAll/xml
+./vesselApi/index.php/listAll/csv
+./vesselApi/index.php/listAll/vndapijson
+
+
+//filters
+
+//mmsi
+./vesselApi/index.php/getVessels/json?mmsi=247039300
+./vesselApi/index.php/getVessels/xml?mmsi=247039300
+./vesselApi/index.php/getVessels/csv?mmsi=247039300
+./vesselApi/index.php/getVessels/vndapijson?mmsi=247039300 //should be a post request
+
+//multiple mmsi
+./vesselApi/index.php/getVessels/json?mmsi=247039300&mmsi=311486000
+./vesselApi/index.php/getVessels/xml?mmsi=247039300&mmsi=311486000
+./vesselApi/index.php/getVessels/csv?mmsi=247039300&mmsi=311486000
+./vesselApi/index.php/getVessels/vndapijson?mmsi=247039300&mmsi=311486000
+
+//lat range
+./vesselApi/index.php/getVessels/json?lat_min=42.163880000
+./vesselApi/index.php/getVessels/json?lat_max=42.75178
+./vesselApi/index.php/getVessels/json?lat_min=42.163880000&lat_max=42.75178
+./vesselApi/index.php/getVessels/xml?lat_min=42.163880000&lat_max=42.75178
+./vesselApi/index.php/getVessels/csv?lat_min=42.163880000&lat_max=42.75178
+./vesselApi/index.php/getVessels/vndapijson?lat_min=42.163880000&lat_max=42.75178 //should be a post request
+
+//lon range
+./vesselApi/index.php/getVessels/json?lon_min=15.4415
+./vesselApi/index.php/getVessels/json?lon_max=16.020130000
+./vesselApi/index.php/getVessels/json?lon_min=15.4415&lon_max=16.020130000
+./vesselApi/index.php/getVessels/xml?lon_min=15.4415&lon_max=16.020130000
+./vesselApi/index.php/getVessels/csv?lon_min=15.4415&lon_max=16.020130000
+./vesselApi/index.php/getVessels/vndapijson?lon_min=15.4415&lon_max=16.020130000 //should be a post request
+
+//time interval
+./vesselApi/index.php/getVessels/json?time_min=1372683960
+./vesselApi/index.php/getVessels/json?time_max=1372689900
+./vesselApi/index.php/getVessels/json?time_min=1372683960&time_max=1372689900
+./vesselApi/index.php/getVessels/xml?time_min=1372683960&time_max=1372689900
+./vesselApi/index.php/getVessels/csv?time_min=1372683960&time_max=1372689900
+./vesselApi/index.php/getVessels/vndapijson?time_min=1372683960&time_max=1372689900 //should be a post request
+
+//many fitters all together
+./vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178
+./vesselApi/index.php/getVessels/json?mmsi=247039300&lon_min=15.4415&lon_max=16.020130000
+./vesselApi/index.php/getVessels/json?mmsi=247039300&time_min=1372683960&time_max=1372689900
+./vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000
+./vesselApi/index.php/getVessels/json?mmsi=247039300&lat_min=42.163880000&lat_max=42.75178&lon_min=15.4415&lon_max=16.020130000&time_min=1372683960&time_max=1372689900
+
+//logging
+Check vesselApi.log file after each request
+
+//limit requests
+load more than 10 requests at a time and validate that new requests are blocked
+
+/*
+	Failure tests
+*/
+
+
+//incorrect method call
+	./vesselApi/index.php/listAl/jsona
+	./vesselApi/index.php/getVessel/json?mmsi=247039300
+	
+//incorrect argument's name
+	./vesselApi/index.php/getVessels/json?mms=247039300
+
+//incorrect arguments value
+	./vesselApi/index.php/getVessel/json?mmsi=abc
+	./vesselApi/index.php/getVessel/json?mmsi=SELECT * FROM vesselPosition
+
+//incorrect content type 
+	./vesselApi/index.php/listAll/jsona
+
+////incorrect filter name
+	./vesselApi/index.php/getVessels/json?mms=247039300
+	
+////incorrect range
+./vesselApi/index.php/getVessels/json?lat_min=42.75178&lat_max=42.163880000
+./vesselApi/index.php/getVessels/json?lon_min=16.020130000&lon_max=15.4415
+./vesselApi/index.php/getVessels/xml?time_min=1372689900&time_max=1372683960
+
+
+
+	
