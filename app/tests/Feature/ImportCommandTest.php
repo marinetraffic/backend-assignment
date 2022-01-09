@@ -11,7 +11,7 @@ class ImportCommandTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function test_example()
+    public function records_are_persisted_to_db()
     {
         $this->artisan('import:file')->assertNotExitCode(1);
 

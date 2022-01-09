@@ -2,19 +2,109 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ContentTypes;
-use App\Exports\PositionsExport;
 use App\Http\Requests\PositionRequest;
-use App\Http\Resources\PositionResource;
 use App\Models\Position;
 use Carbon\Carbon;
-use Maatwebsite\Excel\Excel;
-use Spatie\ArrayToXml\ArrayToXml;
-use Spatie\SchemaOrg\Graph;
-
+use App\Traits\PositionTrait;
 
 class PositionController extends Controller
 {
+    use PositionTrait;
+
+    /**
+     * @OA\Info(
+     *      version="1.0.0",
+     *      title="Backend assignment API documentation",
+     *      description="Backend assignment API documentation",
+     * )
+     *
+     * @OA\Server(
+     *      description="Local Server",
+     *      url="/"
+     * )
+     */
+
+    /**
+     * @OA\Get(
+     *      path="/api/positions",
+     *      operationId="getPostionsList",
+     *      tags={"Positions"},
+     *      summary="Get list of ship positions",
+     *      description="Returns list of ship positions",
+     *
+     *      @OA\Parameter(
+     *         name="mmsi",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *             example=247039300
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="maxLat",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *             example=42.75
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="minLat",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *             example=42.75
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="maxLon",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *             example=42.75
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="minLon",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *             example=42.75
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="fromDateTime",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="date",
+     *             example="2013-07-02 17:44:00"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="toDateTime",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="date",
+     *             example="2013-07-02 17:44:00"
+     *         )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *       @OA\Response(response=425, description="Invalid Content Types")
+     *     )
+     *
+     * Returns list of projects
+     */
     public function index(PositionRequest $request)
     {
         $query = Position::query()
@@ -40,50 +130,7 @@ class PositionController extends Controller
                 $query->where('timestamp', '<=', Carbon::parse($toDatetime)->toISOString());
             });
 
-        $contentType = $request->header('content_type');
-
-        if($contentType == ContentTypes::CSV) {
-
-            return (new PositionsExport($query))->download('invoices.csv', Excel::CSV, [
-                'Content-Type' => ContentTypes::CSV,
-            ]);
-        } else if($contentType == ContentTypes::XML) {
-            $xmlData = ArrayToXml::convert(['__numeric' => $query->get()->toArray()]);
-
-            return response()->xml($xmlData);
-        } else if ($contentType == ContentTypes::JSON) {
-
-            return PositionResource::collection(
-                $query->paginate(100));
-
-        }else if ($contentType == ContentTypes::LD) {
-            $graph = new Graph();
-
-            foreach( $query->get() as $position) {
-
-                $graph->listItem($position->lat)
-                    ->identifier($position->mmsi)
-                    ->mmsi($position->mmsi)
-                    ->status($position->status)
-                    ->station($position->station)
-                    ->speed($position->speed)
-                    ->lon($position->lon)
-                    ->lat($position->lat)
-                    ->course($position->course)
-                    ->heading($position->heading)
-                    ->rot($position->rot)
-                    ->timestamp($position->timestamp)
-                ;
-
-            };
-
-            return response($graph)->header('Content-Type', ContentTypes::LD);
-        }  else {
-
-            return response()->json( [
-                'message' => 'Invalid Content Types',
-                'code' => 415
-            ],415);
-        }
+        return $this->getFormattedResponse($request->header('content_type'), $query);
     }
+
 }

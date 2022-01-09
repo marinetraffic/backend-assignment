@@ -45,6 +45,7 @@
    5. minLon
    6. fromDatetime (format: YYYY-DD-MM hh:mm:ss / eg. 2013-07-02 17:44:00)
    7. toDatetime (format: YYYY-DD-MM hh:mm:ss / eg. 2013-07-02 17:44:00)
+4. Tried to add to make OpenApi documentation for tha API did not manage to finish it: http://localhost:8000/api/documentation
 
 ### Testing
 To run tests run command: php artisan test

@@ -140,6 +140,12 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/cloudcreativity/json-api-testing" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel-json-api/testing" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/spatie/schema-org" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/swagger-api/swagger-ui" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/zircote/swagger-php" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/darkaonline/l5-swagger" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
