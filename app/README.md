@@ -3,8 +3,9 @@
 ### Requirements
 1. PHP ^7.4|^8.0
 2. Laravel ^8.75
-3. Postgres ^14.0.1
+3. PostgreSQL ^14.0.1
 4. Docker 
+5. PHPUnit ^9.5.10
 
 ### DB installation 
 1. Run: docker run --name backend-assignment -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432  -d postgres
@@ -54,3 +55,4 @@ To run tests run command: php artisan test
 Logs are stored in txt format in files inside app/storage/logs directory following this naming format api_logging01_05_2022.log
 
 ### Thank you for your time!
+/b
