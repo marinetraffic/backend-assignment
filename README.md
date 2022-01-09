@@ -1,4 +1,6 @@
 # Vessels Tracks API
+### !! Please find my implementation and documentation inside the 'app' directory !!
+
 
 Your task is to create a **RESTful API** that serves vessel tracks from a raw vessel positions data-source.
 The raw data is supplied as a JSON file that you must import to a database schema of your choice.
