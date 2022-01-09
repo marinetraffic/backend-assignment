@@ -19,13 +19,14 @@
 3. Run php artisan key:generate
 4. cp .env.example .env and add your database credentials
 5. cp .env.example .env.testing and add your testing database credentials
-6. Run command: php artisan migrate
-7. 
+6. Rate limit is configurable with a default value of 10 requests/hour. To change it add 'RATE_LIMIT' => xx to your .env file
+7. Run command: php artisan migrate
+8. 
    1. If you want to import ship_positions.json file located in root directory run command: php artisan import:file
    2. If you want to import another similar file run command: php artisan import:file "FULL_PATH_TO_FILE"
    3. If you want to truncate database before import add option "--truncate" to previous command
-8. Run command: php artisan serve
-9. Application is hopefully running on http://localhost:8000 
+9. Run command: php artisan serve
+10. Application is hopefully running on http://localhost:8000 
 
 
 ### Usage
@@ -47,5 +48,8 @@
 
 ### Testing
 To run tests run command: php artisan test
+
+### Logging
+Logs are stored in txt format in files inside app/storage/logs directory following this naming format api_logging01_05_2022.log
 
 ### Thank you for your time!

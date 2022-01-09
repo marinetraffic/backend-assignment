@@ -29,8 +29,6 @@ class RateLimiterTest extends TestCase
         for ($requestCounter = 0; $requestCounter < config('app.rate_limit'); $requestCounter++) {
             $response = $this->json('GET', route('positions'));
 
-            echo $response->status();
-
             $response->assertStatus(200);
         }
         $response = $this->json('GET', route('positions'));
