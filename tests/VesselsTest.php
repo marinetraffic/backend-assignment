@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 require_once 'database/DBManager.php';
@@ -29,7 +30,7 @@ class VesselsTest extends TestCase
     public function testCheckIpSucceed()
     {
         $vessels = new Vessels();
-
+        //fake ip
         $ip = '0.0.0.1';
         $_SERVER['REMOTE_ADDR'] = $ip;
 
@@ -43,6 +44,7 @@ class VesselsTest extends TestCase
 
     public function testFetchesResults()
     {
+        //fake ip
         $ip = '0.0.0.2';
         $query = 'DELETE FROM requests where ip = "' . $ip . '"';
         $this->connection->query($query);
@@ -58,6 +60,7 @@ class VesselsTest extends TestCase
 
     public function testFetchesResultsWithFilter()
     {
+        //fake ip
         $ip = '0.0.0.2';
         $query = 'DELETE FROM requests where ip = "' . $ip . '"';
         $this->connection->query($query);
@@ -82,7 +85,7 @@ class VesselsTest extends TestCase
         $vessels = new Vessels();
 
         $_SERVER['REMOTE_ADDR'] = $ip;
-
+        //fake mmsi
         $_GET['mmsi'] = 'invalid filter';
         $results = $vessels->index();
 

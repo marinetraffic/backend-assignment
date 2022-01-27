@@ -1,36 +1,49 @@
-# Vessels Tracks API
+#Instructions
+To run the project I have created a virtual host on my machine and directed it to the `index.php` file <br>
+Feel free to do the same
 
-Your task is to create a **RESTful API** that serves vessel tracks from a raw vessel positions data-source.
-The raw data is supplied as a JSON file that you must import to a database schema of your choice.
+Create a copy of `.env.example` and name it `.env`
+* cp .env.example .env
+* Name the variables at `.env` with your credentials 
 
-Fields supplied are:
-* **mmsi**: unique vessel identifier
-* **status**: AIS vessel status
-* **station**: receiving station ID
-* **speed**: speed in knots x 10 (i.e. 10,1 knots is 101)
-* **lon**: longitude
-* **lat**: latitude
-* **course**: vessel's course over ground
-* **heading**: vessel's true heading
-* **rot**: vessel's rate of turn
-* **timestamp**: position timestamp
+Install composer
+* composer install
 
-**The API end-point must:**
-* Support the following filters: 
-  * **mmsi** (single or multiple)
-  * **latitude** and **longitude range**
-  * as well as **time interval**.
-* Log incoming requests to a datastore of  your choice (plain text, database, third party service etc.)
-* Limit requests per user to **10/hour**. (Use the request remote IP as a user identifier)
-* Support the following content types:
-  * At least two of the following: application/json, application/vnd.api+json, application/ld+json, application/hal+json
-  * application/xml
-  * text/csv
+Migrate the database with the following command
+* composer migrate
 
-**Share your work:**
-* Stage your solution on a demo page or
-* Fork this repo and create a pull request that contains your implementation in a new branch named after you.
-* Please include your Tests with your source code
-* Include instructions
+Run tests with the following command
+* composer tests
 
-**Have fun!**
+<h3>Testing filters</h3>
+<h4>**mmsi**</h4>
+* **Example:**
+* One `mmsi` filter:
+  
+* http://marine.test/?mmsi=247039300
+* Multiple `mmsi` filters: 
+* http://marine.test/?mmsi[]=247039300,20311486000
+
+<h4>**latitude**</h4>
+* **Example:**
+* `latitude` range filter:
+* need to pass 2 parameters `from_lat` & `to_lat`
+  
+* http://marine.test/?from_lat=42.7518&to_lat=44.2664
+
+<h4>**longitude**</h4>
+* **Example:**
+* `longitude` range filter:
+* need to pass 2 parameters `from_lon` & `to_lon`
+
+* http://marine.test/?from_lon=10.8286&to_lon=16.7439
+
+<h4>**timestamp**</h4>
+* **Example:**
+* `timestamp` timestamp filter:
+* http://marine.test/?timestamp=1372683960
+
+<h4>**If 10 requests are made from the same IP an error will be thrown:**</h4>
+`Too many requests in 1 hour. Try again later`
+
+<h3>Made with love, from Kevin</h3>

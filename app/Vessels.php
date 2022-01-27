@@ -22,9 +22,9 @@ class Vessels
 
         $query = 'select * from ship_positions where 1';
 
-        $query = $this->applyFilters($query);
+        $filters = $this->applyFilters($query);
 
-        $result = $this->connection->query($query);
+        $result = $this->connection->query($filters);
 
         $array = [];
         if ($result && $result->num_rows > 0) {
@@ -32,7 +32,7 @@ class Vessels
                 $array[] = $row;
             }
         }
-        return $array;
+        return [$array];
     }
 
     public function checkIp(): bool
@@ -67,7 +67,7 @@ class Vessels
             }
         }
 
-//Filter for latitude range
+        //Filter for latitude range
         $fromLat = $_GET['from_lat'] ?? null;
         $toLat = $_GET['to_lat'] ?? null;
 
@@ -75,19 +75,19 @@ class Vessels
             $query .= ' and lat between "' . $fromLat . '" and "' . $toLat . '"';
         }
 
-//Filter for longitude range
+        //Filter for longitude range
         $fromLon = $_GET['from_lon'] ?? null;
         $toLon = $_GET['to_lon'] ?? null;
 
         if ((isset($fromLon) && !empty($fromLon)) && (isset($toLon) && !empty($toLon))) {
-            $query .= ' and lat between "' . $fromLon . '" and "' . $toLon . '"';
+            $query .= ' and lon between "' . $fromLon . '" and "' . $toLon . '"';
         }
 
-//Filter for timestamp
+        //Filter for timestamp
         $unixTimestamp = $_GET['timestamp'] ?? null;
         if (isset($unixTimestamp) && !empty($unixTimestamp)) {
             $timestamp = date('Y-m-d H:i:s', $unixTimestamp);
-            $query .= ' and timestamp = ' . $timestamp;
+            $query .= ' and timestamp = "' . $timestamp . '"';
         }
 
         return $query;
