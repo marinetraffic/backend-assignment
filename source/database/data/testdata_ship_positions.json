@@ -1,0 +1,50 @@
+[
+    {
+        "mmsi": 247039300,
+        "status": 0,
+        "stationId": 157,
+        "speed": 155,
+        "lon": "16.08312",
+        "lat": "42.16388",
+        "course": 142,
+        "heading": 143,
+        "rot": "",
+        "timestamp": 1372635900
+    },
+    {
+        "mmsi": 247039300,
+        "status": 0,
+        "stationId": 165,
+        "speed": 155,
+        "lon": "16.67485",
+        "lat": "41.43",
+        "course": 150,
+        "heading": 150,
+        "rot": "",
+        "timestamp": 1372646760
+    },
+    {
+        "mmsi": 311040700,
+        "status": 0,
+        "stationId": 785,
+        "speed": 176,
+        "lon": "35.18197",
+        "lat": "33.86137",
+        "course": 55,
+        "heading": 54,
+        "rot": "",
+        "timestamp": 1372645620
+    },
+    {
+        "mmsi": 311486000,
+        "status": 0,
+        "stationId": 1981,
+        "speed": 146,
+        "lon": "11.3998",
+        "lat": "38.05447",
+        "course": 126,
+        "heading": 133,
+        "rot": "",
+        "timestamp": 1372635240
+    }
+]
