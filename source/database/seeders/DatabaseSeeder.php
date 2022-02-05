@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //added switching mechanism, so that Tests would use a much smaller subset of data.
         if (env("APP_ENV") == "testing"){
             $this->call([TestShippositionSeeder::class]);
         }

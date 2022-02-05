@@ -10,23 +10,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ShipPositionTest extends TestCase
 {
-    use RefreshDatabase;
-    // use DatabaseMigrations;
+    use RefreshDatabase; //this Trait allows to reseed the database per each test.
 
-    //uses a database seeder to seed test database from a small subset of data
-    protected $seed = TestShippositionSeeder::class;
-    protected $test_record_mmsi = 247039300;
-    // protected $baseUrl = "http://localhost";
-
-    // public function test_mmsi_filter()
-    // {
-    //     $response = $this->withHeaders([
-    //         'Accept' => 'application/json'
-    //     ])->get('/api/v1/json/shippositions?filter[mmsi][]=247039300'); 
-    //     $response->assertStatus(200);
-    //     $response->assertHeader('Content-Type', 'application/json');
-    //     $response->assertJsonCount(2);
-    // }
+    protected $test_record_mmsi = "247039300";
 
     /**a
      * A basic feature test example.
@@ -56,7 +42,7 @@ class ShipPositionTest extends TestCase
                 'timestamp'
             ]
         ]);
-        // $response->assertJsonFragment(['mmsi'=> $this->test_record_mmsi]);
+        $response->assertJsonFragment(['mmsi'=> $this->test_record_mmsi]);
         
     }
 
@@ -95,7 +81,7 @@ class ShipPositionTest extends TestCase
             ]
             
         ]);
-        // $response->assertJsonFragment(['id'=> (string)$this->test_record_mmsi]);
+        $response->assertJsonFragment(['id'=> $this->test_record_mmsi]);
         
     }
 
@@ -107,7 +93,7 @@ class ShipPositionTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/xml');
-        // $response->assertSee("<mmsi>".$this->test_record_mmsi."</mmsi>",false);
+        $response->assertSee("<mmsi>".$this->test_record_mmsi."</mmsi>",false);
     }
 
     public function test_csv_header()

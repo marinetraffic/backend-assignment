@@ -23,7 +23,6 @@ class ShippositionSchema extends Schema
      */
     public static string $model = Shipposition::class;
     
-    protected ?array $defaultPagination = ['number' => 1];
     /**
      * Get the resource fields.
      *

@@ -49,7 +49,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: lumen
+      POSTGRES_DB: laravel
       POSTGRES_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: postgres

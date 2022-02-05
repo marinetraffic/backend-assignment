@@ -17,7 +17,7 @@ use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 |
 */
 
-Route::middleware(['throttle:10,1'])->group(function () {
+Route::middleware(['throttle:10,60', 'request.logging'])->group(function () {
     switch (app('request')->header('Accept')) {
       case 'application/json':
         Route::get('/v1/shippositions', [ShipPositionController::class, 'showShipPositionsJson']);

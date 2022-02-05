@@ -41,6 +41,7 @@ class ShipPositionFiltersTest extends TestCase
         $response->assertHeader('Content-Type', 'application/json');
         $response->assertJsonFragment(['mmsi'=> "247039300"]);
         $response->assertJsonFragment(['mmsi'=> "311040700"]);
+        $response->assertJsonMissing(['mmsi' => "311486000"]);
         $response->assertJsonCount(3);
     }
 
