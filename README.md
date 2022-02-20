@@ -4,18 +4,18 @@ name: Elton Ibi
 email: ibi.elton@gmail.com
 ```
 
-## Introduction
+# Introduction
 The  Vessels Tracks API  allows you to search vessels by HTTP requests.
 
-## Requests
+# Requests
 Any tool that is fluent in HTTP can communicate with the API simply by requesting the correct URI.
 * Method:GET
 
-##HTTP Statuses
+# HTTP Statuses
 * 200 OK
 * 415 Unsupported Content-Type
 
-##Parameters
+# Parameters
 * mmsi (integer) required
 * fromdate (integer unix timestamp)
 * todate (integer unix timestamp)
@@ -26,14 +26,14 @@ Any tool that is fluent in HTTP can communicate with the API simply by requestin
 * latitudeto (integer) 
 * type (string) default value "xml" & supported values [json,xml,csv,hal]
 
-##URI EXAMPLE
+# URI EXAMPLE
 ```url
 http://{host}:{port}/api/ship?mmsi=311486000&fromdate=1372694880&todate=1372700100&longitudefrom=2.3985&longitudeto=50.3985&latitudefrom=9.01322&latitudeto=190.01322&type=json
 
 ```
-##Authentication [N/A]
+# Authentication [N/A]
 
-##Responses
+# Responses
 Response for an json Object Collection
 ```json
 [
@@ -63,6 +63,6 @@ Response for an json Object Collection
   }
 ]
 ```
-##Rate Limit
+# Rate Limit
 * Requests through the API are rate limited per requested ip with rate limit is 10/hour.
 
