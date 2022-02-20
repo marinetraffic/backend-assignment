@@ -1,36 +1,68 @@
 # Vessels Tracks API
+```email
+name: Elton Ibi 
+email: ibi.elton@gmail.com
+```
 
-Your task is to create a **RESTful API** that serves vessel tracks from a raw vessel positions data-source.
-The raw data is supplied as a JSON file that you must import to a database schema of your choice.
+## Introduction
+The  Vessels Tracks API  allows you to search vessels by HTTP requests.
 
-Fields supplied are:
-* **mmsi**: unique vessel identifier
-* **status**: AIS vessel status
-* **station**: receiving station ID
-* **speed**: speed in knots x 10 (i.e. 10,1 knots is 101)
-* **lon**: longitude
-* **lat**: latitude
-* **course**: vessel's course over ground
-* **heading**: vessel's true heading
-* **rot**: vessel's rate of turn
-* **timestamp**: position timestamp
+## Requests
+Any tool that is fluent in HTTP can communicate with the API simply by requesting the correct URI.
+* Method:GET
 
-**The API end-point must:**
-* Support the following filters: 
-  * **mmsi** (single or multiple)
-  * **latitude** and **longitude range**
-  * as well as **time interval**.
-* Log incoming requests to a datastore of  your choice (plain text, database, third party service etc.)
-* Limit requests per user to **10/hour**. (Use the request remote IP as a user identifier)
-* Support the following content types:
-  * At least two of the following: application/json, application/vnd.api+json, application/ld+json, application/hal+json
-  * application/xml
-  * text/csv
+##HTTP Statuses
+* 200 OK
+* 415 Unsupported Content-Type
 
-**Share your work:**
-* Stage your solution on a demo page or
-* Fork this repo and create a pull request that contains your implementation in a new branch named after you.
-* Please include your Tests with your source code
-* Include instructions
+##Parameters
+* mmsi (integer) required
+* fromdate (integer unix timestamp)
+* todate (integer unix timestamp)
+* longitudefrom (integer)
+* longitudeto (integer)
+* latitudefrom (integer)
+* latitudefrom (integer)
+* latitudeto (integer) 
+* type (string) default value "xml" & supported values [json,xml,csv,hal]
 
-**Have fun!**
+##URI EXAMPLE
+```url
+http://{host}:{port}/api/ship?mmsi=311486000&fromdate=1372694880&todate=1372700100&longitudefrom=2.3985&longitudeto=50.3985&latitudefrom=9.01322&latitudeto=190.01322&type=json
+
+```
+##Authentication [N/A]
+
+##Responses
+Response for an json Object Collection
+```json
+[
+  {
+    "mmsi": 311486000,
+    "status": 0,
+    "stationId": 1916,
+    "speed": 153,
+    "lat": 10.82863,
+    "lon": 38.2366,
+    "course": 101,
+    "heading": 102,
+    "rot": "",
+    "timestamp": 1372683960
+  },
+  {
+    "mmsi": 311486000,
+    "status": 0,
+    "stationId": 1931,
+    "speed": 153,
+    "lat": 11.00047,
+    "lon": 38.20821,
+    "course": 101,
+    "heading": 102,
+    "rot": "",
+    "timestamp": 1372683960
+  }
+]
+```
+##Rate Limit
+* Requests through the API are rate limited per requested ip with rate limit is 10/hour.
+
