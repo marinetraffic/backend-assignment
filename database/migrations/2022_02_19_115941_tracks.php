@@ -1,9 +1,13 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * @author Elton
+ * Class Tracks
+ * Database migration class
+ */
 class Tracks extends Migration
 {
     /**
@@ -20,11 +24,11 @@ class Tracks extends Migration
             $table->integer('stationId')->nullable(false);;
             $table->integer('speed')->nullable(false);;
             $table->double('lat')->nullable();
-            $table->double('log')->nullable();
+            $table->double('lon')->nullable();
             $table->integer('course')->nullable(false);
             $table->integer('heading')->nullable(false);
             $table->string('rot')->nullable();;
-            $table->timestamp('timestamp')->index()->nullable(false);
+            $table->integer('timestamp')->index()->nullable(false);
         });
     }
 
@@ -35,6 +39,6 @@ class Tracks extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tracks');
     }
 }

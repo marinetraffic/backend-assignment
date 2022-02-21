@@ -68,39 +68,40 @@ class ShipServiceController extends Controller
      * unix timestamp
      * @var string
      */
-    protected $longitude_from=-180.00000;
+    protected $longitude_from=-180;
 
     /**
      * @var string
      */
-    protected $longitude_to=180.00000;
+    protected $longitude_to=180;
 
     /**
      * @var string
      */
-    protected $latitude_from=-90.00000;
+    protected $latitude_from=-90;
 
     /**
      * @var string
      */
-    protected $latitude_to=90.00000;
+    protected $latitude_to=90;
 
     /**
+     * @TODO validate query params as expected
      * ShipServiceController constructor.
      * Init class params based on requested query params.
      * @param Request $request
      */
     public function __construct(Request $request)
     {
-        $this->mmsi             =      explode(',', $request->get('mmsi'));
         $this->path             =      $request->path();
+        $this->mmsi             =      explode(',', $request->get('mmsi'));
         $this->contentType      =      !is_null($request->get('type'))?$request->get('type'):self::XML;//Set as default content type xml when is not defined
         $this->from_date        =      $request->get('fromdate', 0);//Set big bang timestamp
         $this->to_date          =      $request->get('todate', Carbon::now()->timestamp);//Set Current tstamp when is not defined
-        $this->longitude_from   =      $request->get('longitudefrom', $this->longitude_from);//Set min longitude value when is not defined
-        $this->longitude_to     =      $request->get('longitudeto', $this->longitude_to);//Set max longitude value when is not defined
-        $this->latitude_from    =      $request->get('latitudefrom', $this->latitude_from);//Set min latitude value when is not defined
-        $this->latitude_to      =      $request->get('latitudeto', $this->latitude_to);//Set max latitude value when is not defined
+        $this->longitude_from   =      $request->get('longitudefrom', $this->longitude_from);//Set min {-180} longitude value when is not defined
+        $this->longitude_to     =      $request->get('longitudeto', $this->longitude_to);//Set max {180} longitude value when is not defined
+        $this->latitude_from    =      $request->get('latitudefrom', $this->latitude_from);//Set min {-90} latitude value when is not defined
+        $this->latitude_to      =      $request->get('latitudeto', $this->latitude_to);//Set max {90} latitude value when is not defined
     }
 
     /**
@@ -108,12 +109,15 @@ class ShipServiceController extends Controller
      * Provides ship tracks based on mmsi,time interval & latitude,longitude range.
      * Supported Content-Types [application/xml,application/json,application/hal+json,text/csv].
      * Default Content-Types is application/xml.
-     * No required params (Maybe mmsi should be mandatory).
+     * Parameter mmsi should be required.
      * @param Request $request
      * @return Application|ResponseFactory|Http\Response
      */
     public function search(Request $request)
     {
+        if (!$request->has('mmsi')) {
+            return response("400 Bad Request", 400)->header('Content-Type', 'text/html');
+        }
         if (in_array($this->contentType, self::$supportedContentTypes)) {
             $tracks=$this->retrieve();
             switch ($this->contentType) {

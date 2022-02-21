@@ -8,6 +8,13 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Illuminate\Support\Str;
 
+/**
+ * @author Elton
+ * Class ApiRequestLogger
+ * Logs incoming requests to file under dir /storage/logs
+ * @package App\Http\Middleware
+ */
+
 class ApiRequestLogger
 {
     /**
