@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tracks;
+
+use \Illuminate\Http;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use SoapBox\Formatter\Formatter;
 use \Illuminate\Contracts\Foundation\Application;
 use \Illuminate\Contracts\Routing\ResponseFactory;
-use \Illuminate\Http;
+use App\Repositories\TracksRepository;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
@@ -18,22 +18,21 @@ use Symfony\Component\VarDumper\VarDumper;
  * @package App\Http\Controllers
  * Current api service not supports Api-KEY
  * Test cases class \tests\Feature\ShipServiceControllerTest.php
- * @example of full url: http://{host}:{port}/api/ship?mmsi=247039300,311486000&fromdate=1372694880&todate=1372700100&longitudefrom=2.3985&longitudeto=72.3985&latitudefrom=9.01322&latitudeto=190.01322&type=json
+ * @example of full url: http://{host}:{port}/api/ship?mmsi=311486000,311486000&timestamp=1372700160,1572700100&lon=11.20494,11.26997&lat=38.16413,80.16413&type=json
  */
-
 class ShipServiceController extends Controller
 {
 
-    const HAL   =  'hal';
-    const JSON  =  'json';
-    const XML   =  'xml';
-    const CSV   =  'csv';
+    const HAL   =   'hal';
+    const JSON  =   'json';
+    const XML   =   'xml';
+    const CSV   =   'csv';
 
     /**
      * Supported Media Content Types.
      * @var array[]
      */
-    private static $supportedContentTypes = [self::HAL, self::JSON, self::XML, self::CSV];
+    private static $supportedContentTypes=[self::HAL, self::JSON, self::XML, self::CSV];
 
     /**
      * Media Content Type
@@ -41,67 +40,26 @@ class ShipServiceController extends Controller
     protected $contentType;
 
     /**
-     * Maritime Mobile Service Identity
-     * @var array
-     */
-    protected $mmsi=[];
-
-    /**
-     * @example api/ship
      * @var
      */
-    protected $path;
+    protected $tracksRepo;
 
     /**
-     * unix timestamp
-     * @var string
+     * @var
      */
-    protected $from_date;
+    protected $filters;
 
     /**
-     * unix timestamp
-     * @var string
-     */
-    protected $to_date;
-
-    /**
-     * unix timestamp
-     * @var string
-     */
-    protected $longitude_from=-180;
-
-    /**
-     * @var string
-     */
-    protected $longitude_to=180;
-
-    /**
-     * @var string
-     */
-    protected $latitude_from=-90;
-
-    /**
-     * @var string
-     */
-    protected $latitude_to=90;
-
-    /**
-     * @TODO validate query params as expected
      * ShipServiceController constructor.
      * Init class params based on requested query params.
+     * ShipServiceController constructor.
      * @param Request $request
+     * @param TracksRepository $tracksRepo
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, TracksRepository $tracksRepo)
     {
-        $this->path             =      $request->path();
-        $this->mmsi             =      explode(',', $request->get('mmsi'));
-        $this->contentType      =      !is_null($request->get('type'))?$request->get('type'):self::XML;//Set as default content type xml when is not defined
-        $this->from_date        =      $request->get('fromdate', 0);//Set big bang timestamp
-        $this->to_date          =      $request->get('todate', Carbon::now()->timestamp);//Set Current tstamp when is not defined
-        $this->longitude_from   =      $request->get('longitudefrom', $this->longitude_from);//Set min {-180} longitude value when is not defined
-        $this->longitude_to     =      $request->get('longitudeto', $this->longitude_to);//Set max {180} longitude value when is not defined
-        $this->latitude_from    =      $request->get('latitudefrom', $this->latitude_from);//Set min {-90} latitude value when is not defined
-        $this->latitude_to      =      $request->get('latitudeto', $this->latitude_to);//Set max {90} latitude value when is not defined
+        $this->tracksRepo=$tracksRepo;
+        $this->collectAndValidateParams($request);
     }
 
     /**
@@ -119,16 +77,15 @@ class ShipServiceController extends Controller
             return response("400 Bad Request", 400)->header('Content-Type', 'text/html');
         }
         if (in_array($this->contentType, self::$supportedContentTypes)) {
-            $tracks=$this->retrieve();
             switch ($this->contentType) {
                 case self::CSV:
-                    return $this->asCsv($tracks);
+                    return $this->tracksRepo->asCsv($this->filters);
                 case self::JSON:
-                    return $this->asJson($tracks);
+                    return $this->tracksRepo->asJson($this->filters);
                 case self::HAL:
-                    return $this->asHal($tracks);
+                    return $this->tracksRepo->asHal($this->filters);
                 case self::XML:
-                    return $this->asXml($tracks);
+                    return $this->tracksRepo->asXml($this->filters);
             }
         }
         return response("Unsupported Content-Type:{$this->contentType}, accepts only:" . json_encode(self::$supportedContentTypes), 415)
@@ -136,65 +93,47 @@ class ShipServiceController extends Controller
     }
 
     /**
-     * Return content as JSON
-     * @param $tracks
-     * @return Application|ResponseFactory|Http\Response
+     * Collect and validate query params
+     * @param $request
      */
-    protected function asJson($tracks)
+    protected function collectAndValidateParams($request)
     {
-        return response($tracks->toJson(), 200)
-            ->header('Content-Type', 'application/json');
-    }
+        $this->filters['path']=$request->path();
+        $this->contentType=!is_null($request->get('type')) ? $request->get('type') : self::XML;//Set as default content type xml when is not defined
+        $this->filters['mmsi']=explode(',', $request->get('mmsi'));
 
-    /**
-     * Return content as HAL
-     * @param $tracks
-     * @return Application|ResponseFactory|Http\Response
-     */
-    protected function asHal($tracks)
-    {
-        foreach ($tracks as $index=>$track) {
-            $track->_links=['self'=>['href'=>"{$this->path}?mmsi=" . $track->mmsi, 'hreflang'=>'en', 'type'=>'application/hal+json']];
+        if (is_null($request->get('timestamp'))) {
+            $this->filters['timestamp']=[0, Carbon::now()->timestamp];
+        } else {
+            if (count(explode(',', $request->get('timestamp'))) == 1) {
+                $this->filters['timestamp']=explode(',', $request->get('timestamp'));
+                $this->filters['timestamp']=array_merge( $this->filters['timestamp'],explode(',', $request->get('timestamp')));
+            } else {
+                $this->filters['timestamp']=explode(',', $request->get('timestamp'));
+            }
         }
-        return response($tracks->toJson(), 200)
-            ->header('Content-Type', 'application/hal+json');
+
+        if (is_null($request->get('lon'))) {
+            $this->filters['lon']=[-180, 180];//Set default longitude range [-180, 180]
+        } else {
+            if (count(explode(',', $request->get('lon'))) == 1) {
+                $this->filters['lon']=explode(',', $request->get('lon'));
+                $this->filters['lon']=array_merge( $this->filters['lon'],explode(',', $request->get('lon')));
+            } else {
+                $this->filters['lon']=explode(',', $request->get('lon'));
+            }
+        }
+
+        if (is_null($request->get('lat'))) {
+            $this->filters['lat']=[-90, 90];//Set default longitude range [-90, 90]
+        } else {
+            if (count(explode(',', $request->get('lat'))) == 1) {
+                $this->filters['lat']=explode(',', $request->get('lat'));
+                $this->filters['lat']=array_merge( $this->filters['lat'],explode(',', $request->get('lat')));
+            } else {
+                $this->filters['lat']=explode(',', $request->get('lat'));
+            }
+        }
     }
 
-    /**
-     * Return content as XML
-     * @param $tracks
-     * @return Application|ResponseFactory|Http\Response
-     */
-    protected function asXml($tracks)
-    {
-        $response=Formatter::make($tracks->toJson(), Formatter::JSON)->toXml();
-        return response($response, 200)
-            ->header('Content-Type', 'application/xml');
-    }
-
-    /**
-     * Return content as csv
-     * @param $tracks
-     * @return Application|ResponseFactory|Http\Response
-     */
-    protected function asCsv($tracks)
-    {
-        $response=Formatter::make($tracks->toJson(), Formatter::CSV)->toCsv();
-        return response($response, 200)
-            ->header('Content-Type', 'text/csv');
-    }
-
-    /**
-     * Retrieve data based on params from Ship::mode()
-     * @return Tracks
-     */
-    protected function retrieve()
-    {
-        return Tracks::whereIn('mmsi', $this->mmsi)
-            ->whereBetween('timestamp', [$this->from_date,$this->to_date])
-            ->whereBetween('lon', [$this->longitude_from,$this->longitude_to])
-            ->whereBetween('lat',  [$this->latitude_from,$this->latitude_to])
-            ->orderBy('mmsi')
-            ->get();
-    }
 }

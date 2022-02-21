@@ -22,21 +22,17 @@ Any tool that is fluent in HTTP can communicate with the API simply by requestin
 * 415 Unsupported Media Type
 
 # Parameters
-
 | Name     | Description       | Required |   Type   | Sample Value         |
 | :---:    | :---:             | :---:    | :---:    | :---:                |
-| mmsi     | Maritime Mobile Service Identity               | yes      | integer  | 311486000,311486001 |
-| fromdate     | Start date               | no      | integer  |1372694880 |
-| todate     | End date               | no      | integer  |1372694880 |    
-| longitudefrom     |geographic coordinate {Min=-180 Max=180}            | no      | integer  | 50.3985 |  
-| longitudeto     |geographic coordinate {Min=-180 Max=180}              | no      | integer  | 50.3985 |  
-| latitudefrom     |geographic coordinate {Min=-90 Max=90}              | no      | integer  | 2.3985 |  
-| latitudeto     |geographic coordinate {Min=-90 Max=90}             | no      | integer  | 50.3985 |  
-| type     | default value "xml" & supported values [json,xml,csv,hal]           | no      | string  | csv |  
+| mmsi     | Maritime Mobile Service Identity                   | yes     | integer  |311486000,311486001 |
+| timestamp|Range from to timestamp                             | no      | integer  |1372694880,1372694890 |
+| lon      |Range of geographic coordinate {Min=-180 Max=180}   | no      | integer  |50.3985,60.3985 |  
+| lat      |Range of geographic coordinate {Min=-90 Max=90}     | no      | integer  |2.3985,2.3985  |  
+| type     | default value "xml" & supported values [json,xml,csv,hal]    | no       |string  | csv |  
 
 # Example Request
 ```url
-http://{host}:{port}/api/ship?mmsi=311486000,311486001&fromdate=1372694880&todate=1372700100&longitudefrom=2.3985&longitudeto=50.3985&latitudefrom=9.01322&latitudeto=190.01322&type=json
+http://{host}:{port}/api/ship?mmsi=311486000,311486000&timestamp=1372700160,1572700100&lon=11.20494,11.26997&lat=38.16413,80.16413&type=json
 
 ```
 
