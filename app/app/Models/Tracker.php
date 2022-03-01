@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tracker extends Model
-{
+class Tracker extends Model {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['mmsi', 'status', 'stationid', 'speed', 'lon', 'lat', 'course', 'heading', 'rot', 'timestamp'];
 }
