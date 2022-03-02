@@ -6,30 +6,43 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Positions;
 use App\Exceptions\NoResults;
+use App\Exceptions\InvalidParameter;
 
 class PositionsController extends Controller {
     public function getPositionsByVesselId(Request $request, $mmsi) {
-        if(!$mmsi) throw new Exception();
+        if(!$mmsi) throw new InvalidParameter();
 
         $positions = Positions::whereRaw("mmsi IN ($mmsi)")->get();
-        if(!$positions->count()) throw new Exception();
+        if(!$positions->count()) throw new NoResults();
 
         return response()->json(['status'=>true, 'data'=>$positions], 200);    
     }
 
-    public function getPositionsByLat(Request $request, $lat) {
-        if(!$lat) throw new Exception();
-        if(!is_string($lat)) throw new Exception();
-        if(!str_contains($lat, ',')) throw new Exception();
+    public function getPositionsByLatLon(Request $request, $lat, $lon) {
+        if(!$lon || !$lat || !str_contains($lat, ',') || 
+            !str_contains($lon, ',')) throw new InvalidParameter();
 
-        $range = explode(',', $lat);
-        $from = floatval(trim($range[0]));
-        $to = floatval(trim($range[1]));
+        $lonFrom = floatval(trim(explode(',', $lon)[0]));
+        $lonTo = floatval(trim(explode(',', $lon)[1]));
 
-        $positions = Positions::whereRaw("lat BETWEEN $from AND $to")->get(['*']);
+        $latFrom = floatval(trim(explode(',', $lat)[0]));
+        $latTo = floatval(trim(explode(',', $lat)[1]));
+
+        $positions = Positions::whereRaw("lon BETWEEN $lonFrom AND $lonTo AND lat BETWEEN $latFrom AND $latTo")->get();
         if(!$positions->count()) throw new NoResults();
 
         return response()->json($positions, 200);
     }
 
+    public function getPositionsByStamp(Request $request) {
+        $queryParams = $request->query();
+        if(!isset($queryParams['start']) || !isset($queryParams['end']) || 
+            !preg_match('/^\d+$/', $queryParams['start']) || 
+            !preg_match('/^\d+$/', $queryParams['end'])) throw new InvalidParameter();
+      
+        $positions = Positions::whereRaw("timestamp BETWEEN ".$queryParams['start']." AND ".$queryParams['end'])->get();
+        if(!$positions->count()) throw new NoResults();
+
+        return response()->json($positions, 200);
+    }
 }

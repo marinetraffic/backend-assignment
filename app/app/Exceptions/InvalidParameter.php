@@ -6,9 +6,11 @@ use Exception;
 
 class InvalidParameter extends Exception {
     protected $message;
+    protected $parameter;
 
     public function __construct($m='', $p='') {
         $this->message = $m ? $m : 'Invalid parameter used...';
+        $this->parameter = $p ? $p : '';
     }
 
     public function render($request) {
@@ -16,6 +18,6 @@ class InvalidParameter extends Exception {
             'status'=>false,
             'errorCode'=>'err02',
             'message'=>$this->message,
-        ], 404);
+        ], 400);
     }
 }
