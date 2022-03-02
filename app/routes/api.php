@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Positions;
+use App\Http\Controllers\PositionsController;
 
-Route::get('positions{mmsi}', function($mmsi) {
-    return Positions::find($mmsi);
-});
+Route::get('positions/{mmsi}', [PositionsController::class, 'getPositionsByVesselId']);
+Route::get('positions/lat/{lat}', [PositionsController::class, 'getPositionsByLat']);

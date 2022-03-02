@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration {
     public function up() {
         Schema::create('positions', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('mmsi');
             $table->boolean('status');
             $table->integer('stationid');
