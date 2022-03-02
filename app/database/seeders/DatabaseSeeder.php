@@ -7,6 +7,6 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
     public function run() {
-        $this->call(TrackerTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
     }
 }

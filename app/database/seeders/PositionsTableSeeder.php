@@ -4,19 +4,19 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Tracker;
+use App\Models\Positions;
 use File;
 
-class TrackerTableSeeder extends Seeder {
+class PositionsTableSeeder extends Seeder {
     public function run() {
-        Tracker::truncate();
+        Positions::truncate();
 
         // Get content of file.
         $json = File::get("database/data/ship_positions.json");
         $positions = json_decode($json);
 
         foreach ($positions as $key => $value) {
-            Tracker::create([
+            Positions::create([
                 "mmsi" => $value->mmsi,
                 "status" => $value->status,
                 "stationid" => $value->stationId,
