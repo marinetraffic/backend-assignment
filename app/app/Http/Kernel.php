@@ -4,8 +4,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-class Kernel extends HttpKernel
-{
+class Kernel extends HttpKernel {
     protected $middleware = [
         \Illuminate\Http\Middleware\HandleCors::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -29,6 +28,7 @@ class Kernel extends HttpKernel
     ];
 
     protected $middlewarePriority = [
+        \App\Http\Middleware\LimitRequests::class,
         \App\Http\Middleware\LogIncomingRequests::class,
     ];
 
@@ -43,5 +43,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'log.incoming.requests' => \App\Http\Middleware\LogIncomingRequests::class,
+        'limit.user.requests' => \App\Http\Middleware\LimitRequests::class,
     ];
 }

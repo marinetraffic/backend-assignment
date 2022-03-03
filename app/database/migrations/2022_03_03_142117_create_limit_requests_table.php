@@ -8,7 +8,6 @@ return new class extends Migration {
     public function up() {
         Schema::create('limit_requests', function (Blueprint $table) {
             $table->string('ip', 39);
-            $table->tinyInteger('nreq');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
