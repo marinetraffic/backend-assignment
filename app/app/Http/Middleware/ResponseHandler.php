@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Helpers\Conversions;
+// use SimpleXMLElement;
 
 class ResponseHandler {
     public function handle(Request $request, Closure $next) {
@@ -15,30 +17,36 @@ class ResponseHandler {
         $response = json_decode(json_encode($response->original), true);
 
         if($acceptHeader == 'application/json') 
-            return $response;
+            return response()->json($response, $httpCode)
+                ->header('Content-Type', 'application/json');
 
         // Based on the accept header change the representation of the response.
-        $mimedResponse = [];
         switch($acceptHeader) {
             case 'application/vnd.api+json':
+                $jsonApiResponse = [];
+
                 if($response['status']) {
-                    $mimedResponse['data'] = $response['data'];
+                    $jsonApiResponse['data'] = $response['data'];
                 } else {
                     unset($response['status']);
-                    $mimedResponse['error'] = $response;
+                    $jsonApiResponse['error'] = $response;
                 }
+
+                return response()->json(
+                    $jsonApiResponse, 
+                    $httpCode
+                )->header('Content-Type', 'application/vnd.api+json');
             break;
             case 'application/xml':
-
+                $conv = new Conversions();
+                $xml = new \SimpleXMLElement('<root/>');
+                
+                header('Content-type: text/xml');
+                $conv->arrayToXml($response, $xml);
+                echo $xml->asXML();
+                
+                return response('');
             break;
-
         }
-        
-        // Set the content type to be the same as the desired on Accept header
-        return response()->json(
-            $mimedResponse, 
-            $httpCode,
-            ['Content-Type => '.$acceptHeader]
-        );
     }
 }
