@@ -8,6 +8,10 @@ use App\Exceptions\BlockedFromApi;
 
 class LimitRequests {
     public function handle(Request $request, Closure $next) {
+        // If env is testing then skipp middleware
+        if (env('APP_ENV') === 'testing') 
+            return $next($request);
+
         $userIp = $request->ip();
         $nowStamp = time();
         $stampBeforeOneHour = $nowStamp - 3600;
