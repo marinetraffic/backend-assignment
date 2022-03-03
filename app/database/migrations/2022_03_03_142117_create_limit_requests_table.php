@@ -6,16 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up() {
-        Schema::create('log_incoming_requests', function (Blueprint $table) {
-            $table->id();
+        Schema::create('limit_requests', function (Blueprint $table) {
             $table->string('ip', 39);
-            $table->text('url');
-            $table->text('payload');
+            $table->tinyInteger('nreq');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
     public function down() {
-        Schema::dropIfExists('log_incoming_requests');
+        Schema::dropIfExists('limit_requests');
     }
 };
