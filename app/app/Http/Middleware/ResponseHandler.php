@@ -47,6 +47,17 @@ class ResponseHandler {
                 
                 return response('');
             break;
+            case 'text/csv':
+                $filename = "response_".time().".csv";
+                $conv = new Conversions();
+                $csv = $conv->arrayToCSV($response['data'], $filename);
+
+                return response()->download(
+                    public_path("temp/".$filename),
+                    $filename,
+                    ['Content-Type: text/csv']
+                );
+            break;
         }
     }
 }

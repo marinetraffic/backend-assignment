@@ -16,4 +16,22 @@ class Conversions {
             }
         }
     }
+
+    public function arrayToCSV($array, $name) {
+        $fh = fopen('temp/'.$name, 'w');
+        
+        if (is_array($array)) {
+            foreach ($array as $line) {
+                foreach ($line as $key => $value) 
+                    if (is_array($value)) 
+                        $line[$key] = $value[0];
+ 
+                if (is_array($line)) 
+                    fputcsv($fh,$line);
+            }
+        }
+
+        fclose($fh);
+        return $fh;
+    }
 }

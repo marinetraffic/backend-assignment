@@ -16,6 +16,7 @@ class CheckRequestContentType {
             'application/json',
             'application/vnd.api+json',
             'application/xml',
+            'text/csv',
         ];
 
         $headers = $request->header();

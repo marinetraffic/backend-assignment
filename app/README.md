@@ -30,6 +30,13 @@
     </ul>
 </p>
 
+<h3> General <h3>
+<p>
+    <ul>
+        <li> About text/csv media type. The file is created on public/temp folder. </li>
+    </ul>
+</p>
+
 <h3> Future Tweacks/Updates <h3>
 <p>
     <ul>
