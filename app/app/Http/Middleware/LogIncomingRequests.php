@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 
 class LogIncomingRequests {
     public function handle(Request $request, Closure $next) {
-        $path = $request->path();
-        $ip = $request->ip();
-        $payload = $request->getContent();
-
-        print_r($path);
-        print_r($ip);
-        print_r($payload);
+        // Store request movement to database.
+        $logIncomingReq = new \App\Models\LogIncomingRequests;
+        $logIncomingReq->ip = $request->ip();
+        $logIncomingReq->url = $request->getRequestUri();
+        $logIncomingReq->payload = $request->getContent();
+        $logIncomingReq->save();
 
         return $next($request);
     }
