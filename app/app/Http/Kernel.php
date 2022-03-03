@@ -29,6 +29,7 @@ class Kernel extends HttpKernel {
 
     protected $middlewarePriority = [
         \App\Http\Middleware\LimitRequests::class,
+        \App\Http\Middleware\CheckRequestContentType::class,
         \App\Http\Middleware\LogIncomingRequests::class,
     ];
 
@@ -44,5 +45,6 @@ class Kernel extends HttpKernel {
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'log.incoming.requests' => \App\Http\Middleware\LogIncomingRequests::class,
         'limit.user.requests' => \App\Http\Middleware\LimitRequests::class,
+        'request.header.conttype' => \App\Http\Middleware\CheckRequestContentType::class,
     ];
 }

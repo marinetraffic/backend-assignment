@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Helpers\HttpCodes;
 
 class MediaIsNotSupported extends Exception {
     protected $message;
