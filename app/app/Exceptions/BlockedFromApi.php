@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Helpers\HttpCodes;
 
 class BlockedFromApi extends Exception {
     protected $message;
@@ -16,6 +17,6 @@ class BlockedFromApi extends Exception {
             'status'=>false,
             'errorCode'=>'err03',
             'message'=>$this->message,
-        ], 401);
+        ], HttpCodes::UNAUTHORIZED);
     }
 }

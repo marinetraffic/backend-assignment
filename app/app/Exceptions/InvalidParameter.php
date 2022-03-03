@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Helpers\HttpCodes;
 
 class InvalidParameter extends Exception {
     protected $message;
@@ -18,6 +19,6 @@ class InvalidParameter extends Exception {
             'status'=>false,
             'errorCode'=>'err02',
             'message'=>$this->message,
-        ], 400);
+        ], HttpCodes::BAD_REQUEST);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Positions;
 use App\Exceptions\NoResults;
 use App\Exceptions\InvalidParameter;
+use App\Helpers\HttpCodes;
 
 class PositionsController extends Controller {
     public function getPositionsByVesselId(Request $request, $mmsi) {
@@ -15,7 +16,7 @@ class PositionsController extends Controller {
         $positions = Positions::whereRaw("mmsi IN ($mmsi)")->get();
         if(!$positions->count()) throw new NoResults();
 
-        return response()->json(['status'=>true, 'data'=>$positions], 200);    
+        return response()->json(['status'=>true, 'data'=>$positions], HttpCodes::OK);    
     }
 
     public function getPositionsByLatLon(Request $request, $lat, $lon) {
@@ -31,7 +32,7 @@ class PositionsController extends Controller {
         $positions = Positions::whereRaw("lon BETWEEN $lonFrom AND $lonTo AND lat BETWEEN $latFrom AND $latTo")->get();
         if(!$positions->count()) throw new NoResults();
 
-        return response()->json(['status'=>true, 'data'=>$positions], 200);    
+        return response()->json(['status'=>true, 'data'=>$positions], HttpCodes::OK);    
     }
 
     public function getPositionsByStamp(Request $request) {
@@ -43,6 +44,6 @@ class PositionsController extends Controller {
         $positions = Positions::whereRaw("timestamp BETWEEN ".$queryParams['start']." AND ".$queryParams['end'])->get();
         if(!$positions->count()) throw new NoResults();
 
-        return response()->json(['status'=>true, 'data'=>$positions], 200);    
+        return response()->json(['status'=>true, 'data'=>$positions], HttpCodes::OK);    
     }
 }
