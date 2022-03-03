@@ -31,7 +31,7 @@ class PositionsController extends Controller {
         $positions = Positions::whereRaw("lon BETWEEN $lonFrom AND $lonTo AND lat BETWEEN $latFrom AND $latTo")->get();
         if(!$positions->count()) throw new NoResults();
 
-        return response()->json($positions, 200);
+        return response()->json(['status'=>true, 'data'=>$positions], 200);    
     }
 
     public function getPositionsByStamp(Request $request) {
@@ -43,6 +43,6 @@ class PositionsController extends Controller {
         $positions = Positions::whereRaw("timestamp BETWEEN ".$queryParams['start']." AND ".$queryParams['end'])->get();
         if(!$positions->count()) throw new NoResults();
 
-        return response()->json($positions, 200);
+        return response()->json(['status'=>true, 'data'=>$positions], 200);    
     }
 }
