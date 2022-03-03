@@ -21,10 +21,12 @@
             <b>ALL</b> seeders (both approaches will take some time). 
         </li>
         <li> Run command `php artisan serve` on folder /app to start the API.  </li>
-        <li> After that you can play around with the API either by using a tool such as 
+        <li> 
+            After that you can play around with the API either by using a tool such as 
             <a href='https://www.postman.com/'>Postman</a> or by using your web browser 
             (since all the endpoints are simple GET's). 
         </li>
+        <li> You can change the 'Accept' header on Postman in order to change the media desired response. </li>
     </ul>
 </p>
 
@@ -35,6 +37,14 @@
             The request limit functionality that limits a user to call the API endpoints 
             to 10 calls/hour, it can be implemented with Redis to minimize the calls on the 
             database and for faster responses. 
+        </li>
+        <li> 
+            Seperate bussiness login even further. Possibly adding a 'Service' layer to handle
+            the queries so that the controller is seperate with the actual database communication
+            and thus easier for unit testing.
+        </li>
+        <li> 
+            Add pagination to route responses.
         </li>
     </ul>
 </p>

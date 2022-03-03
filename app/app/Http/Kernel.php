@@ -46,5 +46,6 @@ class Kernel extends HttpKernel {
         'log.incoming.requests' => \App\Http\Middleware\LogIncomingRequests::class,
         'limit.user.requests' => \App\Http\Middleware\LimitRequests::class,
         'request.header.conttype' => \App\Http\Middleware\CheckRequestContentType::class,
+        'response.handler' => \App\Http\Middleware\ResponseHandler::class,
     ];
 }

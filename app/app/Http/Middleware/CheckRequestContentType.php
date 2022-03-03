@@ -15,17 +15,19 @@ class CheckRequestContentType {
         $validContentTypes = [
             'application/json',
             'application/vnd.api+json',
+            'application/xml',
         ];
 
         $headers = $request->header();
-        $acceptHeader = $request->header('accept') 
-            ? $request->header('accept')
-            : 'application/json';
+        $acceptHeader = $request->header('accept');
     
         // If the accept header requested is not part of the allowed ones
         // the throw error response.
         if(!in_array($acceptHeader, $validContentTypes))
             throw new MediaIsNotSupported();
+
+        if(!$acceptHeader)
+            $request->headers->set('Accept', 'application/json');
 
         return $next($request);
     }
