@@ -9,6 +9,10 @@ use App\Helpers\Conversions;
 
 class ResponseHandler {
     public function handle(Request $request, Closure $next) {
+        // If env is testing then skipp middleware
+        if (env('APP_ENV') === 'testing') 
+            return $next($request);
+
         $response = $next($request);
         $httpCode = $response->status();
         $acceptHeader = $request->header('accept');
@@ -49,11 +53,12 @@ class ResponseHandler {
             break;
             case 'text/csv':
                 $filename = "response_".time().".csv";
+                $path = dirname(__DIR__, 3)."/public/temp/$filename";
                 $conv = new Conversions();
-                $csv = $conv->arrayToCSV($response['data'], $filename);
+                $csv = $conv->arrayToCSV($response['data'], $path);
 
                 return response()->download(
-                    public_path("temp/".$filename),
+                    $path,
                     $filename,
                     ['Content-Type: text/csv']
                 );

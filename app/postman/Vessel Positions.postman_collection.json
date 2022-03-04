@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "48b29325-fc53-4466-982e-ed2eb2d8464a",
+		"name": "Vessel Positions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get positions with multiple MMSI",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/positions/247039300,311040700",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"positions",
+						"247039300,311040700"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get positions with single MMSI",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/positions/247039300",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"positions",
+						"247039300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get positions by latlon range",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/positions/41.75178,43.75178/13.26933,16.19508",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"positions",
+						"41.75178,43.75178",
+						"13.26933,16.19508"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get positions by timestamp",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/csv",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/positions?start=1372643960&end=1372673960",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"positions"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "1372643960",
+							"description": "start range"
+						},
+						{
+							"key": "end",
+							"value": "1372673960"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

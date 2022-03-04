@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 class Conversions {
-    public function arrayToXml($data, &$xml_data) {
+    public function arrayToXml($data, &$xml_data) {        
         foreach($data as $key => $value) {
             if(is_array($value)) {
                 if(is_numeric($key))
@@ -17,8 +17,8 @@ class Conversions {
         }
     }
 
-    public function arrayToCSV($array, $name) {
-        $fh = fopen('temp/'.$name, 'w');
+    public function arrayToCSV($array, $path) {
+        $fh = fopen($path, 'w');
         
         if (is_array($array)) {
             foreach ($array as $line) {

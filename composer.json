@@ -1,6 +1,0 @@
-{
-    "require": {
-        "vyuldashev/laravel-openapi": "^1.5",
-        "primitive/openapi-initializer": "^1.4"
-    }
-}

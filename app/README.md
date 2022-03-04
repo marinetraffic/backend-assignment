@@ -1,18 +1,20 @@
 <h1> Vessel Tracker </h1>
 
-<h3> About <h3>
+<h3> About </h3>
 <p>
     I am using Laravel framework for the REST API to serve all the vessel tracking movements.
     As for the database MySQL is being used which is populated with data via Laravel seeder based
     on the MOCK JSON file located in database/data/ship_positions.json. 
 </p>
 
-<h3> Run Application <h3>
+<h3> Run Application </h3>
 <p>
     To run the application you need to:
     <ul>
         <li> Download the repository. </li>
         <li> Using XAMPP you need to create a database by the name 'api'. </li>
+        <li> Run Apache and MySQL modules from XAMPP panel. </li>
+        <li> Go to /app folder and execute 'composer install' to install all dependencies based on the composer.json file. </li>
         <li> Run command `php artisan migrate` on folder /app to create the database table based on the <b>Migrations</b> of Laravel. </li>
         <li> 
             To populate the database table with the MOCK JSON file execute 
@@ -27,17 +29,18 @@
             (since all the endpoints are simple GET's). 
         </li>
         <li> You can change the 'Accept' header on Postman in order to change the media desired response. </li>
+        <li> To run the tests go to /app folder and execute 'php artisan test'. </li>
     </ul>
 </p>
 
-<h3> General <h3>
+<h3> General </h3>
 <p>
     <ul>
         <li> About text/csv media type. The file is created on public/temp folder. </li>
     </ul>
 </p>
 
-<h3> Future Tweacks/Updates <h3>
+<h3> Future Tweacks/Updates </h3>
 <p>
     <ul>
         <li> 
