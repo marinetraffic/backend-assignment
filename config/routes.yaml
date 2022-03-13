@@ -1,0 +1,9 @@
+index:
+   path: /
+   controller: App\Controller\DefaultController::index
+coverage:
+   path: /coverage
+   controller: App\Controller\CoverageController::index   
+swagger_ui:
+    path: /docs
+    controller: api_platform.swagger.action.ui    

@@ -1,0 +1,35 @@
+api_platform:
+    title: 'Marine Traffic sample API'
+    description: 'Your task is to create a RESTful API that serves vessel tracks from a raw vessel positions data-source. The raw data is supplied as a JSON file that you must import to a database schema of your choice.'
+    version: '1.0.0'
+    enable_swagger_ui: true
+    enable_entrypoint: true
+    enable_docs: true
+    doctrine:
+        enabled: false
+    openapi:
+        # The contact information for the exposed API.
+        contact:
+            # The identifying name of the contact person/organization.
+            name: Athanasios Koumpouras
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
+    formats:
+        jsonld:   ['application/ld+json']
+        jsonhal:  ['application/hal+json']
+        jsonapi:  ['application/vnd.api+json']
+        json:     ['application/json']
+        xml:      ['application/xml', 'text/xml']
+        yaml:     ['application/x-yaml']
+        csv:      ['text/csv']
+        html:     ['text/html']
+    elasticsearch:
+        hosts: ['%env(ELASTICSEARCH_HOST)%']
+        mapping:
+            App\Entity\Location:
+                index: '%env(ELASTICSEARCH_INDEX)%'
+
