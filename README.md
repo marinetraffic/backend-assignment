@@ -655,6 +655,9 @@ Using Redis to store the request. We are also passing headers in case a Redis is
  x-ratelimit-remaining: 9 #user request remaining
  x-ratelimit-reset: 1647187661 #Expiration time of limit
 ```
+# Access Kibana
+
+![Step 1](./marine-traffic-images/kibana-1.png)
 
 ## Extra features I would like to add.
 * A database can be used as storage (write queries) and elastic search can do all the (read queries). 
