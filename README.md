@@ -655,16 +655,23 @@ Using Redis to store the request. We are also passing headers in case a Redis is
  x-ratelimit-remaining: 9 #user request remaining
  x-ratelimit-reset: 1647187661 #Expiration time of limit
 ```
+Select monolog*  or locations* to 
 # Access Kibana
-Create
+Connect to elasticsearch
 ![Step 1](marine-traffic-images/kibana-1.png)
 ![Step 2](marine-traffic-images/kibana-2.png)
+Type ```monolog*``` or ```locations*``` for indexing. Also kibana will cache it that way.
 ![Step 3](marine-traffic-images/kibana-3.png)
+Define the timestap field. and hit **Create index pattern**
 ![Step 4](marine-traffic-images/kibana-4.png)
+You are done!
 ![Step 5](marine-traffic-images/kibana-5.png)
+Select from the burger the **Discover** menu link
 ![Step 6](marine-traffic-images/kibana-6.png)
+Select the **monolog** index and you are ready to browse the data!
 ![Step 7](marine-traffic-images/kibana-7.png)
 
+You can follow the above steps to connect with locations and start doing some data mining!
 
 ## Extra features I would like to add.
 * A database can be used as storage (write queries) and elastic search can do all the (read queries). 
