@@ -35,7 +35,8 @@
         "symfony/twig-bundle": "5.4.*",
         "symfony/uid": "5.4.*",
         "symfony/validator": "5.4.*",
-        "symfony/yaml": "5.4.*"
+        "symfony/yaml": "5.4.*",
+        "webonyx/graphql-php": "^14.11"
     },
     "require-dev": {
         "hautelook/alice-bundle": "^2.10",
