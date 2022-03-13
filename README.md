@@ -656,8 +656,15 @@ Using Redis to store the request. We are also passing headers in case a Redis is
  x-ratelimit-reset: 1647187661 #Expiration time of limit
 ```
 # Access Kibana
-
+Create
 ![Step 1](marine-traffic-images/kibana-1.png)
+![Step 2](marine-traffic-images/kibana-2.png)
+![Step 3](marine-traffic-images/kibana-3.png)
+![Step 4](marine-traffic-images/kibana-4.png)
+![Step 5](marine-traffic-images/kibana-5.png)
+![Step 6](marine-traffic-images/kibana-6.png)
+![Step 7](marine-traffic-images/kibana-7.png)
+
 
 ## Extra features I would like to add.
 * A database can be used as storage (write queries) and elastic search can do all the (read queries). 
