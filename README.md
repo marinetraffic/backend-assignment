@@ -8,19 +8,19 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 ## Code Details
 ### Implementation decisions
 * I'm using **Symfony 5.4** framework for the REST API. 
-* I have decided that elasticsearch will be more effience for this type of problem. Elasticsearch has been build for search, supporting **geo_shape** and **geo_point** that can been used to calucalte distances and area.
-* I have only one entrypoint (GET). All the filters can been applyed to the same request
-* Population of the elasticsearch will happend at the boot-up of the php container in-case this stuck can be used for testing
+* I have decided that elastic search will be more efficient for this type of problem. Elasticsearch has been built for search, supporting **geo_shape** and **geo_point** that can be used to calculate distances and area.
+* I have only one entry point (GET). All the filters can be applied to the same request
+* Population of the elastic search will happen at the boot-up of the PHP container in case this stack can be used for testing
 * Using Redis for caching and limiting requests (pool)
 * I'm forwarding all the logs to Kibana. I'm still keeping local logs.
-* Build for cloud. No session stickiness nor file stickiness.
+* Build for the cloud. No session stickiness nor file stickiness.
 
 
 ### Dependencies
 - docker
 - docker-compose
 
-### Stuck
+### Stack
 | Image | Version | Port |Use | 
 | ---     | ---   | ---   | ---   |
 | Elasticsearch | 7.9.3 | 9200 | Holds the ship positions |
@@ -41,7 +41,7 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
   docker-compose logs -f
   ```
   Launch your browser at http://localhost:8000. 
-  You can start iterogating the API using curl 
+  You can start interrogating the API using curl 
   ``` 
   curl -X 'GET' 'http://localhost:8000/api/v1/locations?page=1&geolocation=42.65908%2C15.54455' -H 'accept: application/ld+json'
   ```
@@ -62,7 +62,7 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 | http://localhost:8000/docs | Swagger page (dev mode only)  |
 | http://localhost:8000/_profiler/ | Debugger (dev mode only)  |
 | http://localhost:8000/docs?ui=re_doc | re-doc (dev mode only)  |
-| http://localhost:8000/api/v1/locations | Vessel tracker api  |
+| http://localhost:8000/api/v1/locations | Vessel tracker API  |
 
 
 ## Supported content types
@@ -108,7 +108,7 @@ Headers
 ```
 
 Response
-```json
+```JSON
 {
   "@context": "/api/v1/contexts/Location",
   "@id": "/api/v1/locations",
@@ -222,7 +222,7 @@ Headers
  x-robots-tag: noindex 
 ```
 Response
-```json
+```JSON
 {
   "_links": {
     "self": {
@@ -321,7 +321,7 @@ Headers
  x-robots-tag: noindex 
 ```
 Response
-```json
+```JSON
 {
   "links": {
     "self": "/api/v1/locations?geolocation=42.48938%2C15.7496%2C1"
@@ -393,7 +393,7 @@ Response
 }
 ```
 
-## json
+## JSON
 Request
 ```bash
 curl -X 'GET' \
@@ -423,7 +423,7 @@ cache-control: no-cache,private
  x-robots-tag: noindex 
 ```
 Response
-```json
+```JSON
 [
   {
     "mmsi": 247039300,
@@ -608,7 +608,7 @@ Headers
  x-robots-tag: noindex 
 ```
 Responses
-```yaml
+```YAML
 [{ mmsi: 247039300, timestamp: '2013-07-01T17:39:00+00:00', speed: 15.4, geoLocation: { lat: 42.48938, lon: 15.7496 } }, { mmsi: 247039300, timestamp: '2013-07-01T17:42:00+00:00', speed: 15.5, geoLocation: { lat: 42.48565, lon: 15.75362 } }, { mmsi: 247039300, timestamp: '2013-07-01T17:36:00+00:00', speed: 15.4, geoLocation: { lat: 42.49308, lon: 15.74558 } }]
 ```
 
@@ -648,8 +648,8 @@ mmsi,timestamp,speed,geoLocation.lat,geoLocation.lon
 247039300,2013-07-01T17:36:00+00:00,15.4,42.49308,15.74558
 ```
 
-## Limit request per user ip
-Using redis to store the request. We also passing headers incase a redis is not available. 
+## Limit request per user IP
+Using Redis to store the request. We are also passing headers in case a Redis is not available. 
 ```
  x-ratelimit-limit: 10 #user limit request
  x-ratelimit-remaining: 9 #user request remaining
@@ -657,9 +657,9 @@ Using redis to store the request. We also passing headers incase a redis is not 
 ```
 
 ## Extra features I would like to add.
-* A database can be used as storage (write queries) and elasticsearch can do all the (read queries). 
-* Event system to update the elasticsearch from a Doctrine prospective
-* All the (write queries) can be send to a queue to eliminate single point of failure
+* A database can be used as storage (write queries) and elastic search can do all the (read queries). 
+* Event system to update the elastic search from a Doctrine prospective
+* All the (write queries) can be sent to a queue to eliminate a single point of failure
 * Rotation on logs (for local logs files)
 * Improve testing (add more tests)
 
