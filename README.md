@@ -77,6 +77,16 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 | yaml | application/x-yaml | [yaml](#yaml) |
 | csv | text/csv | [csv](#csv) |
 
+# Using the API
+![Swagger](marine-traffic-images/swagger.png)
+
+| Parameter | Type | default | allow empty | example | documentation |
+| ---     | ---     | ---     | ---     | ---     | ---     | 
+| page | integer| 1 | no | - | - |  - |
+| timestamp | date-time | none | yes |2013-07-01T17:42:00Z | [rfc3339](https://datatracker.ietf.org/doc/html/rfc3339) |
+| mmsi | integer | none | yes | 247039300 | single value of a mmsi |
+| mmsi[] | string | none | yes | 247039300,311040700 | command delimeter values |
+| geolocation | string | only the distance set to 10km | yes | 34.35218,33.42341,10 | lat,lon,distance (in km) |
 
 ## json-ld
 Request
