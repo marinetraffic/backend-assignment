@@ -17,7 +17,7 @@ api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
-        versions: [3]
+        versions: [2]
     formats:
         jsonld:   ['application/ld+json']
         jsonhal:  ['application/hal+json']
@@ -26,9 +26,9 @@ api_platform:
         xml:      ['application/xml', 'text/xml']
         yaml:     ['application/x-yaml']
         csv:      ['text/csv']
+
     elasticsearch:
         hosts: ['%env(ELASTICSEARCH_HOST)%']
         mapping:
             App\Entity\Location:
                 index: '%env(ELASTICSEARCH_INDEX)%'
-

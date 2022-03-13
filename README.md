@@ -8,15 +8,11 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 ## Code Details
 ### Implementation decisions
 * I'm using **Symfony 5.4** framework for the REST API. 
-
 * I have decided that elasticsearch will be more effience for this type of problem. Elasticsearch has been build for search, supporting **geo_shape** and **geo_point** that can been used to calucalte distances and area.
-
 * I have only one entrypoint (GET). All the filters can been applyed to the same request
-
 * Population of the elasticsearch will happend at the boot-up of the php container in-case this stuck can be used for testing
-
+* Using Redis for caching and limiting requests (pool)
 * I'm forwarding all the logs to Kibana. I'm still keeping local logs.
-
 * Build for cloud. No session stickiness nor file stickiness.
 
 
@@ -29,8 +25,9 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 | ---     | ---   | ---   | ---   |
 | Elasticsearch | 7.9.3 | 9200 | Holds the ship positions |
 | Kibana | 7.9.3 | 5601 |For logging and data mining|
-| Php | 8.1 FPM | 9000  |
+| PHP | 8.1 FPM | 9000  | Personal Home Page :) |
 | NGINX | latest | 8000 |WebServer  |
+| Xdebug | 3 | 9003 | Debugging  |
 | Redis | latest | 5392 |cache and limit-requests /s  |
 
 ### Use
@@ -64,6 +61,8 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 | http://localhost:8000 | Landing page  |
 | http://localhost:8000/docs | Swagger page (dev mode only)  |
 | http://localhost:8000/_profiler/ | Debugger (dev mode only)  |
+| http://localhost:8000/docs?ui=re_doc | re-doc (dev mode only)  |
+| http://localhost:8000/api/v1/locations | Vessel tracker api  |
 
 
 ## Supported content types
