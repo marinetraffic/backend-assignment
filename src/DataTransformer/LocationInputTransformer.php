@@ -29,6 +29,13 @@ final class LocationInputTransformer implements DataTransformerInterface {
         $geolocation->lat = $data->geolocation->lat;
         $geolocation->lon = $data->geolocation->lon;
         $location->geoLocation = $geolocation;
+
+        $location->stationId = $data->stationId;
+        $location->speed = $data->speed;
+        $location->rot = $data->rot;
+        $location->course = $data->course;
+        $location->heading = $data->heading;
+
         return $location;
     }
 

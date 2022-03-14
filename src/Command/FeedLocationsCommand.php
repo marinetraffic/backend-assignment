@@ -56,7 +56,7 @@ class FeedLocationsCommand extends Command
     {
         $this->setDescription('Feed Locations to Elasticsearch');
         $this->addArgument('json-file', InputArgument::REQUIRED, 'File to be injected into ES');
-        $this->addOption('dry-run', 'r' ,InputOption::VALUE_NONE,'How many records to be added');
+        $this->addOption('dry-run', 'r' ,InputOption::VALUE_NONE,'Dry run (for testing purposes)');
         $this->addOption('recreate-index', 'i',InputOption::VALUE_NONE,'Recreate the index');
     }
 

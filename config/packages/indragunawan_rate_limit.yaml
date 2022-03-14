@@ -1,8 +1,29 @@
-# Read the documentation: https://github.com/IndraGunawan/api-rate-limit-bundle/blob/master/Resources/doc/usage.md
 indragunawan_api_rate_limit:
     enabled: true
     throttle:
         default:
-            limit: 1000 # max attempts per period
-            period: 60 # in seconds
+            limit: 10 # max attempts per period
+            period: 3600 # in seconds
         sort: 'rate-limit-desc'
+    cache: cache.rate_limiter
+
+when@dev: 
+    indragunawan_api_rate_limit:
+        enabled: true
+        throttle:
+            default:
+                limit: 1000 # max attempts per period
+                period: 300 # in seconds
+            sort: 'rate-limit-desc'
+        cache: cache.rate_limiter
+
+
+when@test: 
+    indragunawan_api_rate_limit:
+        enabled: true
+        throttle:
+            default:
+                limit: 10000 # max attempts per period
+                period: 300 # in seconds
+            sort: 'rate-limit-desc'
+        cache: cache.rate_limiter

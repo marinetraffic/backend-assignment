@@ -1,6 +1,6 @@
 Vessel Tracker
 ===
-Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/backend-assignment#readme)
+Abstract: [Original Marine Traffic ReadMe](https://github.com/marinetraffic/backend-assignment#readme)
 ## Project Information
 - Title:  `Vessel Tracker API`
 - Authors:  `Athanasios Koumpouras`
@@ -28,31 +28,85 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 | PHP | 8.1 FPM | 9000  | Personal Home Page :) |
 | NGINX | latest | 8000 |WebServer  |
 | Xdebug | 3 | 9003 | Debugging  |
-| Redis | latest | 5392 |cache and limit-requests /s  |
+| Redis | latest | 6379 |cache and limit-requests /s  |
 
 ### Use
 - Build the project
-  ```
+  ```bash
   docker-compose build
   ```
 - Start the project
-  ```
+  ```bash
   docker-compose up -d
   docker-compose logs -f
   ```
   Launch your browser at http://localhost:8000. 
   You can start interrogating the API using curl 
-  ``` 
+  ```bash
   curl -X 'GET' 'http://localhost:8000/api/v1/locations?page=1&geolocation=42.65908%2C15.54455' -H 'accept: application/ld+json'
   ```
 - Stop the project
-  ```
+  ```bash
   docker-compose down
   ```
   Stop the project and delete the volumes. 
-  ```
+  ```bash
   docker-compose down -v
   ```
+### Run tests
+Get a list of the containers
+```bash
+docker ps
+CONTAINER ID   IMAGE                                                 COMMAND                  CREATED             STATUS             PORTS                              NAMES
+c8dc7284ac54   marinetraffic-rest_nginx                              "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:8000->80/tcp               marinetraffic-rest_nginx_1
+b07d48a30176   marinetraffic-rest_php                                "docker-php-entrypoi…"   About an hour ago   Up About an hour   0.0.0.0:9000->9000/tcp             marinetraffic-rest_php_1
+9492801e2b7e   docker.elastic.co/kibana/kibana:7.9.3                 "/usr/local/bin/dumb…"   About an hour ago   Up About an hour   0.0.0.0:5601->5601/tcp             marinetraffic-rest_kibana_1
+3b3e7443a692   docker.elastic.co/elasticsearch/elasticsearch:7.9.3   "/tini -- /usr/local…"   About an hour ago   Up About an hour   0.0.0.0:9200->9200/tcp, 9300/tcp   marinetraffic-rest_elasticsearch_1
+f12fab2a71a6   redis                                                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:6379->6379/tcp             marinetraffic-rest_redis_1
+```
+Intentify the php docker container
+```bash
+docker exec -it b07d48a30176 "./bin/phpunit"
+```
+If you want to create (or re-create) the coverage. The following command will generate a folder coverage in the root folder of the app
+```bash
+docker exec -it b07d48a30176 bash
+export XDEBUG_MODE=debug,coverage
+./bin/phpunit --coverage-html coverage
+```
+### Re-index Elasticsearch
+Follow the command above to get a list of containers
+```bash
+docker exec -it b07d48a30176 bash
+./bin/console app:feed-locations -i ship_positions.json
+```
+You can get help from the command
+```bash
+./bin/console app:feed-locations --help
+
+Description:
+  Feed Locations to Elasticsearch
+
+Usage:
+  app:feed-locations [options] [--] <json-file>
+
+Arguments:
+  json-file             File to be injected into ES
+
+Options:
+  -r, --dry-run         Dry run (for testing purposes)
+  -i, --recreate-index  Recreate the index
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -e, --env=ENV         The Environment name. [default: "dev"]
+      --no-debug        Switch off debug mode.
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+```
+
+
 ### Urls
 | URI | Description | 
 | --- | ---   | 
@@ -86,7 +140,7 @@ Abstract: [Orignial Marine Traffic ReadMe](https://github.com/marinetraffic/back
 | timestamp | date-time | none | yes |2013-07-01T17:42:00Z | [rfc3339](https://datatracker.ietf.org/doc/html/rfc3339) |
 | mmsi | integer | none | yes | 247039300 | single value of a mmsi |
 | mmsi[] | string | none | yes | 247039300,311040700 | command delimeter values |
-| geolocation | string | only the distance set to 10km | yes | 34.35218,33.42341,10 | lat,lon,distance (in km) |
+| geolocation | string | only the distance set to 10NM | yes | 34.35218,33.42341,10 | lat,lon,distance (in NM) |
 
 ## json-ld
 Request
@@ -665,7 +719,36 @@ Using Redis to store the request. We are also passing headers in case a Redis is
  x-ratelimit-remaining: 9 #user request remaining
  x-ratelimit-reset: 1647187661 #Expiration time of limit
 ```
-Select monolog*  or locations* to 
+Error handling of limit on requests
+```json
+{
+  "@context": "/api/v1/contexts/Error",
+  "@type": "hydra:Error",
+  "hydra:title": "An error occurred",
+  "hydra:description": "API rate limit exceeded for 172.24.0.1.",
+   ...
+```
+Headers
+```
+ cache-control: max-age=0,must-revalidate,private 
+ connection: keep-alive 
+ content-type: application/ld+json; charset=utf-8 
+ date: Mon,14 Mar 2022 07:41:46 GMT 
+ expires: Mon,14 Mar 2022 07:41:46 GMT 
+ link: <http://localhost:8000/api/v1/docs.jsonld>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation" 
+ server: nginx/1.21.6 
+ transfer-encoding: chunked 
+ x-content-type-options: nosniff 
+ x-debug-token: 2425dc 
+ x-debug-token-link: http://localhost:8000/_profiler/2425dc 
+ x-frame-options: deny 
+ x-powered-by: PHP/8.1.3 
+ x-previous-debug-token: dea56f 
+ x-ratelimit-limit: 10 
+ x-ratelimit-remaining: 0 
+ x-ratelimit-reset: 1647247222 
+ x-robots-tag: noindex 
+```
 # Access Kibana
 Connect to elasticsearch
 ![Step 1](marine-traffic-images/kibana-1.png)
@@ -684,11 +767,9 @@ Select the **monolog** index and you are ready to browse the data!
 You can follow the above steps to connect with locations and start doing some data mining!
 
 ## Extra features I would like to add.
-* A database can be used as storage (write queries) and elastic search can do all the (read queries). 
-* Event system to update the elastic search from a Doctrine prospective
-* All the (write queries) can be sent to a queue to eliminate a single point of failure
-* Rotation on logs (for local logs files)
 * Improve testing (add more tests)
+* Event system to update the elastic search from a Doctrine prospective
+* Rotation on logs (for local logs files)
 
 ### Tested Platform
 ```

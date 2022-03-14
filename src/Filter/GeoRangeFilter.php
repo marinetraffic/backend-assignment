@@ -17,7 +17,7 @@ class GeoRangeFilter extends AbstractSearchFilter
         
         $termQuery = [
             'geo_distance' => [
-                'distance'=> $radius. "km",
+                'distance'=> $radius. "NM",
                 'geolocation' => [
                     'lat' => $lat ,
                     'lon' => $lon
@@ -67,7 +67,7 @@ class GeoRangeFilter extends AbstractSearchFilter
         foreach ($this->properties as $property => $strategy) {
             $description[$property] = [
                 'property' => $property,
-                'description' => 'Format: latitude,longitude,radius. <br/>Radius in km. Default radius (10km)',
+                'description' => 'Format: latitude,longitude,radius. <br/>Radius in NM. Default radius (10NM)',
                 'type' => 'object',
                 'required' => false,
             ];

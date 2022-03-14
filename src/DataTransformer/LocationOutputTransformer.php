@@ -34,6 +34,11 @@ final class LocationOutputTransformer implements DataTransformerInterface
         $geolocation->lon =  $data->geolocation['lon'];
         $output->geoLocation = $geolocation;
 
+        $output->stationId = $data->stationId;
+        $output->rot = $data->rot;
+        $output->course = $data->course;
+        $output->heading = $data->heading;
+
         return $output;
     }
 

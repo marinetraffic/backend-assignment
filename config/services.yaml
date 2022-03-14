@@ -41,3 +41,5 @@ services:
         arguments:
             - '%env(ELASTICSEARCH_HOST)%'
             - 'monolog'
+
+

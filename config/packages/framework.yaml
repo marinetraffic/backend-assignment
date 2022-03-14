@@ -23,8 +23,10 @@ framework:
             policy: 'fixed_window'
             limit: 10
             interval: '60 minutes'
-            cache_pool: 'cache.anonymous_rate_limiter'
-            
+            cache_pool: 'cache.rate_limiter'
+
+
+
 when@test:
     framework:
         test: true
