@@ -140,7 +140,7 @@ Options:
 | timestamp | date-time | none | yes |2013-07-01T17:42:00Z | [rfc3339](https://datatracker.ietf.org/doc/html/rfc3339) |
 | mmsi | integer | none | yes | 247039300 | single value of a mmsi |
 | mmsi[] | string | none | yes | 247039300,311040700 | command delimeter values |
-| geolocation | string | only the distance set to 10NM | yes | 34.35218,33.42341,10 | lat,lon,distance (in NM) |
+| geolocation | string | only the range set to 10NM | yes | 34.35218,33.42341,10 | lat,lon,range (in NM) |
 
 ## json-ld
 Request
