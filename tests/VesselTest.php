@@ -24,7 +24,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByMmsi()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $resultsEmpty = (new Vessels($db))->getByMmsi(123456789);
@@ -44,7 +44,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByLonFrom()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $results = (new Vessels($db))->getByLonFrom(14.1);
@@ -61,7 +61,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByLonTo()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $results = (new Vessels($db))->getByLonTo(14.1);
@@ -78,7 +78,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByLatFrom()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $results = (new Vessels($db))->getByLatFrom(34.6);
@@ -95,7 +95,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByLatTo()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $results = (new Vessels($db))->getByLatTo(41.8);
@@ -112,7 +112,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByLat()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $results = (new Vessels($db))->getByLat(15.1, 42.6);
@@ -129,7 +129,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByLon()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $results = (new Vessels($db))->getByLon(15.1, 41.9);
@@ -146,7 +146,7 @@ final class VesselTest extends TestCase
      */
     public function testGetVesselByTimestamp()
     {
-        require_once '../vendor/autoload.php';
+        require_once sprintf('%s%svendor/autoload.php', dirname(__DIR__), DIRECTORY_SEPARATOR);
         $db = (new Database())->getConnection();
 
         $results = (new Vessels($db))->getByLonTo(1372635240);
