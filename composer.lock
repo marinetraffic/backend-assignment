@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1abc7822bd9f28e9a62986817bf04f76",
+    "content-hash": "ba214359fb1862f4b810df2a49f49e78",
     "packages": [
         {
             "name": "brick/math",
@@ -895,16 +895,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.15.0",
+            "version": "v9.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "dc32641f5963578858fb71a9d2fbf995fe1e1ea3"
+                "reference": "dbad869e737542734c48d36d4cb87ee90455c4b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/dc32641f5963578858fb71a9d2fbf995fe1e1ea3",
-                "reference": "dc32641f5963578858fb71a9d2fbf995fe1e1ea3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/dbad869e737542734c48d36d4cb87ee90455c4b8",
+                "reference": "dbad869e737542734c48d36d4cb87ee90455c4b8",
                 "shasum": ""
             },
             "require": {
@@ -1070,7 +1070,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-05-31T14:56:46+00:00"
+            "time": "2022-06-02T18:13:11+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1701,6 +1701,69 @@
                 }
             ],
             "time": "2022-05-10T09:36:00+00:00"
+        },
+        {
+            "name": "mtownsend/response-xml",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtownsend5512/response-xml.git",
+                "reference": "25ea5b8989dcb9466bfa2ac96dbae3bf39b44027"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtownsend5512/response-xml/zipball/25ea5b8989dcb9466bfa2ac96dbae3bf39b44027",
+                "reference": "25ea5b8989dcb9466bfa2ac96dbae3bf39b44027",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/http": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/routing": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "php": "~7.0|~8.0",
+                "spatie/array-to-xml": "^3.0"
+            },
+            "require-dev": {
+                "laravel/framework": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^6.4|^8.5|^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mtownsend\\ResponseXml\\Providers\\ResponseXmlServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mtownsend\\ResponseXml\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Townsend",
+                    "email": "mtownsend5512@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The missing XML support for Laravel's Response class.",
+            "keywords": [
+                "api",
+                "laravel",
+                "response",
+                "xml"
+            ],
+            "support": {
+                "issues": "https://github.com/mtownsend5512/response-xml/issues",
+                "source": "https://github.com/mtownsend5512/response-xml/tree/2.1.0"
+            },
+            "time": "2022-02-21T14:23:49+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2729,6 +2792,69 @@
                 }
             ],
             "time": "2022-03-27T21:42:02+00:00"
+        },
+        {
+            "name": "spatie/array-to-xml",
+            "version": "3.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/array-to-xml.git",
+                "reference": "14ac461c1a97a14ab4656f3c1edfcfd776cbb37b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/array-to-xml/zipball/14ac461c1a97a14ab4656f3c1edfcfd776cbb37b",
+                "reference": "14ac461c1a97a14ab4656f3c1edfcfd776cbb37b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "pestphp/pest": "^1.21",
+                "spatie/pest-plugin-snapshots": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ArrayToXml\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://freek.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Convert an array to xml",
+            "homepage": "https://github.com/spatie/array-to-xml",
+            "keywords": [
+                "array",
+                "convert",
+                "xml"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/array-to-xml/tree/3.1.3"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-08T20:26:48+00:00"
         },
         {
             "name": "symfony/console",

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ApiRequestLogs extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

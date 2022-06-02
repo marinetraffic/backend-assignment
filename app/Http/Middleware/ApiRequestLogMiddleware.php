@@ -3,11 +3,14 @@
 namespace App\Http\Middleware;
 
 use App\Models\ApiRequestLogs;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 
 class ApiRequestLogMiddleware
 {
+    private ApiRequestLogs $log;
+
     public function __construct(ApiRequestLogs $log)
     {
         $this->log = $log;
@@ -31,7 +34,7 @@ class ApiRequestLogMiddleware
         $this->log->body = $request->getContent();
         $this->log->ip = $request->ip();
         $this->log->status_code = $response->getStatusCode();
-        $this->log->created_at = now();
+        $this->log->created_at = Carbon::now();
         $this->log->save();
     }
 }

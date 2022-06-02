@@ -32,6 +32,7 @@ class ImportShipPositionsCommand extends Command
         $ship_positions = json_decode(file_get_contents($path), true);
 
         foreach ($ship_positions as $ship_position) {
+
             ShipPosition::insert( [
                 "mmsi" => $ship_position['mmsi'],
                 "status" => $ship_position['status'],
@@ -43,7 +44,6 @@ class ImportShipPositionsCommand extends Command
                 "heading" => $ship_position['heading'],
                 "rot" => $ship_position['rot'],
                 "timestamp" => $ship_position['timestamp'],
-
             ]);
         }
 
