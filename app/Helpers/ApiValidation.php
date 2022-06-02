@@ -29,6 +29,23 @@ class ApiValidation
         return !empty($this->vesselTrackingHandler->getMmsi());
     }
 
+    #[Pure] public function isLatitudesValid(): bool
+    {
+        $latitudes = $this->vesselTrackingHandler->getLatitudes();
+        if(empty($latitudes) || count($latitudes) != 2)
+            return false;
+
+        return true;
+    }
+
+    #[Pure] public function isLongitudesValid(): bool
+    {
+        $longitudes = $this->vesselTrackingHandler->getLongitudes();
+        if(empty($longitudes) || count($longitudes) != 2)
+            return false;
+
+        return true;
+    }
 
     #[Pure] public function isTimeToGreaterThanTimeFrom(): bool
     {
@@ -47,6 +64,9 @@ class ApiValidation
         $timeTo = $this->vesselTrackingHandler->getFilterTimeTo();
 
         if (!is_null($timeTo) || !is_null($timeFrom))
+            return true;
+
+        if (!empty($this->vesselTrackingHandler->getLongitudes()) || !empty($this->vesselTrackingHandler->getLatitudes()))
             return true;
 
         return !empty($this->vesselTrackingHandler->getMmsi());

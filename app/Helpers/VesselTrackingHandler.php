@@ -5,8 +5,8 @@ namespace App\Helpers;
 class VesselTrackingHandler
 {
     private array $mmsi = [];
-    private mixed $latitude = '';
-    private mixed $longitude  = '';
+    private mixed $latitudes = [];
+    private mixed $longitudes  = [];
     private mixed $filter_time_from;
     private mixed $filter_time_to;
     private string $format;
@@ -15,8 +15,8 @@ class VesselTrackingHandler
     {
         $this->setMmsi(isset($requestInfo['mmsi']) ? array_values($requestInfo['mmsi']) : []);
         $this->setFormat(isset($requestInfo['format']) ? $requestInfo['format'] : 'application/json');
-        $this->setLatitude((isset($requestInfo['latitude'])) ? $requestInfo['latitude'] : null);
-        $this->setLongitude((isset($requestInfo['longitude'])) ? $requestInfo['longitude'] : null);
+        $this->setLatitudes((isset($requestInfo['latitudes'])) ? $requestInfo['latitudes'] : []);
+        $this->setLongitudes((isset($requestInfo['longitudes'])) ? $requestInfo['longitudes'] : []);
         $this->setFilterTimeTo((isset($requestInfo['time_to'])) ? $requestInfo['time_to'] : null);
         $this->setFilterTimeFrom((isset($requestInfo['time_from'])) ? $requestInfo['time_from'] : null);
     }
@@ -40,33 +40,33 @@ class VesselTrackingHandler
     /**
      * @return mixed
      */
-    public function getLatitude(): mixed
+    public function getLatitudes(): mixed
     {
-        return $this->latitude;
+        return $this->latitudes;
     }
 
     /**
-     * @param mixed|string $latitude
+     * @param mixed|string $latitudes
      */
-    public function setLatitude(mixed $latitude): void
+    public function setLatitudes(mixed $latitudes): void
     {
-        $this->latitude = $latitude;
+        $this->latitudes = $latitudes;
     }
 
     /**
      * @return mixed
      */
-    public function getLongitude(): mixed
+    public function getLongitudes(): mixed
     {
-        return $this->longitude;
+        return $this->longitudes;
     }
 
     /**
-     * @param mixed|string $longitude
+     * @param mixed|string $longitudes
      */
-    public function setLongitude(mixed $longitude): void
+    public function setLongitudes(mixed $longitudes): void
     {
-        $this->longitude = $longitude;
+        $this->longitudes = $longitudes;
     }
 
     /**

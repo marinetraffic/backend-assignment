@@ -31,7 +31,7 @@ class VesselTrackingController extends Controller
         $apiValidation = new ApiValidation($vesselHandler);
 
         if(!$apiValidation->mmsiExistWithoutTimeStamps())
-            return response()->json(['error' => 'You have to provide at least one Invoice Id or filtering method!'], 400);
+            return response()->json(['error' => 'You have to provide at least one mmsi or filtering method!'], 400);
 
         if(!$apiValidation->isFormatValid())
             return response()->json(['message' => 'Requested Format is not supported!'], 400);
@@ -52,6 +52,24 @@ class VesselTrackingController extends Controller
                 return response()->json(['error' => 'time_to must be greater than or equal to time_from'], 400);
 
             $shipPositions->where('timestamp', '<=', Carbon::create($vesselHandler->getFilterTimeTo()));
+        }
+
+        if(!empty($vesselHandler->getLatitudes())){
+            if($apiValidation->isLatitudesValid()){
+                $shipPositions->where('lat', '>=' , $vesselHandler->getLatitudes()[0])
+                ->where('lat', '<=' , $vesselHandler->getLatitudes()[1]);
+            }else{
+                return response()->json(['error' => 'You must provide 2 values for latitude range'], 400);
+            }
+        }
+
+        if(!empty($vesselHandler->getLongitudes())){
+            if($apiValidation->isLongitudesValid()){
+                $shipPositions->where('lon', '>=' , $vesselHandler->getLongitudes()[0])
+                    ->where('lon', '<=' , $vesselHandler->getLongitudes()[1]);
+            }else{
+                return response()->json(['error' => 'You must provide 2 values for longitude range'], 400);
+            }
         }
 
         switch ($vesselHandler->getFormat()){
