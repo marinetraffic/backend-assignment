@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  marine_web:
+    image: webdevops/php-apache-dev:8.0
+    container_name: marine_web
+    user: root
+    restart: always
+    volumes:
+      - "./:/app"
+    environment:
+      - WEB_ALIAS_DOMAIN=marine.loc
+      - WEB_DOCUMENT_ROOT=/app/public
+      - PHP_DATE_TIMEZONE=EST
+      - PHP_DISPLAY_ERRORS=1
+      - PHP_MEMORY_LIMIT=2048M
+      - PHP_MAX_EXECUTION_TIME=300
+      - PHP_POST_MAX_SIZE=500M
+      - PHP_UPLOAD_MAX_FILESIZE=1024M
+      - PHP_DEBUGGER=xdebug
+      - XDEBUG_REMOTE_CONNECT_BACK=0
+      - XDEBUG_REMOTE_HOST=192.168.1.2
+      - XDEBUG_REMOTE_PORT=9000
+      - php.xdebug.remote_enable=1
+      - php.xdebug.idekey=PHPSTORM
+    ports:
+      - "80:80"
+      - "443:443"
+      - "32834:22"
+    links:
+      - marine_db:mysql
+  marine_db:
+    image: mariadb:10
+    container_name: marine_db
+    restart: always
+    volumes:
+      - ./db-data:/var/lib/mysql:delegated
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=marine_db
+    ports:
+      - "33067:3306"
