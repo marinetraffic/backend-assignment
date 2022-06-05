@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Interfaces\VesselPositionFilterServiceInterface;
+use App\Interfaces\VesselPositionServiceInterface;
+use App\Services\VesselPositionFilterService;
+use App\Services\VesselPositionService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +15,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        $this->app->bind(VesselPositionServiceInterface::class, VesselPositionService::class);
+        $this->app->bind(VesselPositionFilterServiceInterface::class, VesselPositionFilterService::class);
     }
 
     /**
@@ -21,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
