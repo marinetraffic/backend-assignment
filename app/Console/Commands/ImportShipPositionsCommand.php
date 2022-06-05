@@ -28,6 +28,7 @@ class ImportShipPositionsCommand extends Command
      */
     public function handle()
     {
+        $this->info("Ship Location Import From JSON started");
         $path = public_path() . "/ship_positions/ship_positions.json";
         $ship_positions = json_decode(file_get_contents($path), true);
 
@@ -46,6 +47,8 @@ class ImportShipPositionsCommand extends Command
                 "timestamp" => $ship_position['timestamp'],
             ]);
         }
+
+        $this->info("Ship Locations Imported");
 
         return self::SUCCESS;
     }

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->boolean('status');
             $table->integer('stationId');
             $table->integer('speed');
-            $table->float('lon');
-            $table->float('lat');
+            $table->float('lon', 8 , 5);
+            $table->float('lat',8 , 5);
             $table->integer('course');
             $table->integer('heading');
             $table->string('rot');
