@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RetrieveVesselPositionRequest;
-use App\Services\VesselPositionService;
+use App\Interfaces\VesselPositionServiceInterface;
 use Illuminate\Contracts\Pagination\Paginator;
 
 class VesselPositionController extends Controller

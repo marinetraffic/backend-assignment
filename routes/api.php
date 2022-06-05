@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\VesselPositionController;
+use App\Http\Controllers\Api\VesselPositionController;
 use Illuminate\Support\Facades\Route;
 
 /*
