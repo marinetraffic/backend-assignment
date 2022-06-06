@@ -14,7 +14,7 @@ class XmlResourceCollection implements Responsable
         $this->vesselPositions = $vesselsPositions;
     }
 
-    public function convertArrayToXml(): SimpleXMLElement
+    public function convertArrayToXml(): bool|string
     {
         $xml = new SimpleXMLElement('<root></root>');
         $xml->addChild('status', 'success');
@@ -36,7 +36,7 @@ class XmlResourceCollection implements Responsable
             $node?->addChild('timestamp', $vp['timestamp']);
         }
 
-        return $xml;
+        return $xml->asXML();
     }
 
     public function toResponse($request)

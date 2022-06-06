@@ -12,6 +12,6 @@ class XmlHandler implements ContentTypeHandlerInterface
 {
     public function create_response(array $array_of_data): Application|ResponseFactory|Response
     {
-        return response((new XmlResourceCollection($array_of_data))->convertArrayToXml()->asXML())->withHeaders(['Content-Type' => 'application/xml']);
+        return response((new XmlResourceCollection($array_of_data))->convertArrayToXml())->withHeaders(['Content-Type' => 'application/xml']);
     }
 }
