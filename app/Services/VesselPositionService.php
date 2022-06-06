@@ -3,26 +3,25 @@
 namespace App\Services;
 
 use App\Http\Requests\RetrieveVesselPositionRequest;
-use App\Interfaces\VesselPositionServiceInterface;
+use App\Interfaces\GenerateAppropriateContentTypeResponseServiceInterface;
 use App\Models\VesselPosition;
-use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class VesselPositionService implements VesselPositionServiceInterface
+class VesselPositionService
 {
-    protected int $perPage;
-    protected string $multipleValueSeparator;
+    protected GenerateAppropriateContentTypeResponseServiceInterface $appropriateContentTypeResponseService;
 
-    public function __construct()
+    public function __construct(GenerateAppropriateContentTypeResponseServiceInterface $appropriateContentTypeResponseService)
     {
-        $this->perPage = 25; // @TODO: Move this value to config file
-        $this->multipleValueSeparator = ',';
+        $this->appropriateContentTypeResponseService = $appropriateContentTypeResponseService;
     }
 
-    public function getVesselPosition(RetrieveVesselPositionRequest $request): Paginator
+    public function getVesselPosition(RetrieveVesselPositionRequest $request): Response|StreamedResponse|JsonResponse|Application|ResponseFactory
     {
-        return VesselPosition::query()
-            ->vesselPositionDynamicFilter($request)
-            ->simplePaginate($request->safe()->only(['per_page'])['per_page'] ?? $this->perPage)
-            ->withQueryString();
+        return $this->appropriateContentTypeResponseService->select_output_handler($request->header('accept'), VesselPosition::query()->vesselPositionDynamicFilter($request));
     }
 }

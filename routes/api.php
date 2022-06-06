@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('api')->get('/vessels/track', [VesselPositionController::class, 'get'])->name('vessels.get');
+Route::middleware(['api'])->get('/vessels/track', [VesselPositionController::class, 'get'])->name('vessels.get');
