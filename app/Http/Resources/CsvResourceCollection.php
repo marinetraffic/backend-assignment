@@ -20,7 +20,6 @@ class CsvResourceCollection
 
         // Insert the headers
         $writer->insertOne([
-            'internal_id',
             'mmsi',
             'status',
             'station_id',
@@ -33,10 +32,18 @@ class CsvResourceCollection
             'timestamp'
         ]);
 
+        // Get rid of the internal IDs
+        $writer->addFormatter(function (array $row) {
+            unset($row['id']);
+
+            return $row;
+        });
+
         $writer->insertAll($this->vesselPositions);
 
         echo $writer->toString();
 
-        flush();
+        return static function () {
+        };
     }
 }
