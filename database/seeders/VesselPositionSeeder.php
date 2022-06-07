@@ -37,7 +37,7 @@ class VesselPositionSeeder extends Seeder
                 $vp->latitude = $inner_chunk['lat'];
                 $vp->course = $inner_chunk['course'];
                 $vp->heading = $inner_chunk['heading'];
-                $vp->rate_of_turn = $inner_chunk['rot'];
+                $vp->rate_of_turn = $inner_chunk['rot'] === '' ? null : $inner_chunk['rot'];
                 $vp->timestamp = Carbon::createFromTimestamp($inner_chunk['timestamp']);
                 $vp->save();
             }
