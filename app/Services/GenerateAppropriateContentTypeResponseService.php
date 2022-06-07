@@ -31,7 +31,7 @@ class GenerateAppropriateContentTypeResponseService implements GenerateAppropria
      */
     public function select_output_handler(string $accept_header, Builder $builder): Response|JsonResponse|StreamedResponse|Application|ResponseFactory
     {
-        if ($accept_header === '') {
+        if (!$accept_header || $accept_header === '*/*') {
             return (new $this->available_content_types['default'])->create_response($this->convertBuilderToArray($builder->get()));
         }
 
