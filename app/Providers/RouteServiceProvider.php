@@ -43,10 +43,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perHour(10)->by($request->ip());
-        });
+        if (config('marinetraffic.rate_limiter_active') === true && config('marinetraffic.rate_limiter_engine') === 'provider') {
+            RateLimiter::for('api', static function (Request $request) {
+                return Limit::perHour(config('marinetraffic.rate_limiter_attempts_per_hour'))->by($request->ip());
+            });
+        }
     }
 }
