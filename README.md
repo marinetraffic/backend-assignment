@@ -1,40 +1,50 @@
 # Vessels Tracks API
 
-Your task is to create a **RESTful API** that serves vessel tracks from a raw vessel positions data-source.
-The raw data is supplied as a JSON file that you must import to a database schema of your choice.
+## About
 
-Fields supplied are:
-* **mmsi**: unique vessel identifier
-* **status**: AIS vessel status
-* **station**: receiving station ID
-* **speed**: speed in knots x 10 (i.e. 10,1 knots is 101)
-* **lon**: longitude
-* **lat**: latitude
-* **course**: vessel's course over ground
-* **heading**: vessel's true heading
-* **rot**: vessel's rate of turn
-* **timestamp**: position timestamp
+This repository contains the implementation of a RESTful API
+written in Laravel by George Chatzipavlou (github.com/saimpot) for Backend Assignment from Marine Traffic.
+The backend framework used for this assignment is Laravel (9.1)
 
-**The API end-point must:**
-* Support the following filters: 
-  * **mmsi** (single or multiple)
-  * **latitude** and **longitude range**
-  * as well as **time interval**.
-* Log incoming requests to a datastore of  your choice (plain text, database, third party service etc.)
-* Limit requests per user to **10/hour**. (Use the request remote IP as a user identifier)
-* Support the following content types:
-  * At least two of the following: application/json, application/vnd.api+json, application/ld+json, application/hal+json
-  * application/xml
-  * text/csv
+## Preqrequisites
 
-**Share your work:**
-* Stage your solution on a demo page or
-* Fork this repo and create a pull request that contains your implementation in a new branch named after you.
+* PHP 8.1
+* php-xml extension
+* php-mbstring extension
+* php-mysql for the correct php version. (In my case php8.1-mysql was required)
 
+## Installation Instructions
 
-**Notes:** 
-* Please include your Tests with your source code
-* Include instructions
-* Feel free to use the framework, libraries of your choice or plain PHP to implement the assignment
+* Clone the repository from github using the `git clone` command.
+* Then use `composer install` to install all dependencies.
+* Copy `.env.example` file by using `cp .env.example .env`.
+* Then run `php artisan key:generate` to generate a secure application key.
+* Open newly created `.env` file and edit all the `{{ CHANGE_ME }}` variables. In particular interest is the `DB_DATABASE`.
+* You should create a database table with that name after you've edited the variable. This is going to be the table in the database that holds all the persisted data.
+* Run `php artisan migrate`
+* Run `php artisan db:seed
 
-**Have fun!**
+## Usage
+
+* Use `GET http://marinetraffic.local/api/vessels/track`
+
+### Available content types
+
+* `application/json` (default),
+* `text/csv`,
+* `application/xml`
+
+### Available filters
+
+* `mmsi` - Example: `GET http://marinetraffic.local/api/vessels/track?mmsi=1`
+* multiple `mmsi` - Example: `GET http://marinetraffic.local/api/vessels/track?mmsi=1,2,5,4,6`
+* `coordinates` - Example: `GET http://marinetraffic.local/api/vessels/track?coordinates=15.4415,42.75178`
+* `timestamps` - Example: `GET http://marinetraffic.local/api/vessels/track?timestamps=2013-07-01 13:06:00,2013-07-01 13:10:00`
+
+### Full Url example
+
+`GET http://marinetraffic.local/api/vessels/track?coordinates=15.4415,42.75178&timestamps=2013-07-01 13:06:00 2013-08-02 13:10:00&mmsi=247039301,247039300`
+
+## Testing
+
+There are unit tests and feature tests available. Use `php artisan test` to run the test suite.
