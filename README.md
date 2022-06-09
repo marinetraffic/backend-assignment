@@ -14,3 +14,4 @@
 
 ## Run tests 
 
+`php artisan test`
