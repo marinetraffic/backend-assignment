@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filters;
+namespace App\Http\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -16,7 +16,6 @@ class Filter
      * Initialize the request
      */
     public function __construct(Request $request){
-
         $this->request = $request;
     }
 

@@ -16,7 +16,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $mmsi
- * @property int $status
+ * @property bool $status
  * @property int $station_id
  * @property int $speed
  * @property string $longitude
@@ -43,6 +43,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Position whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Position whereTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Position whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Position withFilter($filter = [])
  */
 	class Position extends \Eloquent {}
 }
