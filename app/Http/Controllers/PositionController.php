@@ -12,8 +12,11 @@ use JetBrains\PhpStorm\Pure;
 
 class PositionController extends Controller
 {
-    public function index(){
-         return Position::withFilter($this->filter())->latest()->paginate(100)->withQueryString();;
+    public function index(Request $request){
+         $positions = Position::withFilter($this->filter())->latest();
+
+        return response()->to($positions);
+
     }
 
     /*
