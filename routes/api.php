@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('position', [\App\Http\Controllers\PositionController::class, 'index'])->middleware(['throttle:position']);
+Route::get('position', [\App\Http\Controllers\PositionController::class, 'index'])->middleware(['throttle:position', 'log']);
