@@ -7,12 +7,13 @@ use App\Http\Filters\Conditions\MmsiFilter;
 use App\Http\Filters\Conditions\TimeFilter;
 use App\Models\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\Pure;
 
 class PositionController extends Controller
 {
     public function index(){
-        return Position::withFilter($this->filter())->paginate(5);
+         return Position::withFilter($this->filter())->latest()->paginate(100)->withQueryString();;
     }
 
     /*

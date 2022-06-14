@@ -11,8 +11,12 @@ class MmsiFilter implements FilterContracts
     /**
      * @inheritDoc
      */
-    public function apply(Builder $builder, $value)
+    public function apply(Builder $builder, $value): Builder
     {
-        return $builder;
+        $explodedValues = array_filter(explode(',', $value));
+
+
+        return $builder->orWhereIn('mmsi', $explodedValues);
+
     }
 }
