@@ -13,7 +13,7 @@ class ContentResponse
 
     public function __construct()
     {
-        $this->type = $this->processContentType();
+        $this->processContentType();
     }
 
     protected function processContentType()
@@ -31,7 +31,7 @@ class ContentResponse
         }
 
 
-        return $contentType;
+        $this->type = $contentType;
     }
 
     public function handle($value): \Illuminate\Http\Response|StreamedResponse
@@ -61,22 +61,6 @@ class ContentResponse
         return Response::make($xml->asXML())->header('Content-Type', 'application/xml');
     }
 
-    protected function to_xml(SimpleXMLElement $object, array $data)
-    {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $new_object = $object->addChild($key);
-                $this->to_xml($new_object, $value);
-            } else {
-                // if the key is an integer, it needs text with it to actually work.
-                if ($key != 0 && $key == (int)$key) {
-                    $key = "key_$key";
-                }
-
-                $object->addChild($key, $value);
-            }
-        }
-    }
 
     protected function handleCsv($value)
     {
@@ -105,10 +89,29 @@ class ContentResponse
             fclose($file);
         };
 
-        return response()->stream($callback, 200, ["Content-type" => "text/csv",
+        return response()->stream($callback, 200, [
+            "Content-type" => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",
             "Pragma" => "no-cache",
             "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
-            "Expires" => "0"]);
+            "Expires" => "0"
+        ]);
+    }
+
+
+    protected function to_xml(SimpleXMLElement $object, array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $new_object = $object->addChild($key);
+                $this->to_xml($new_object, $value);
+            } else {
+                if ($key != 0 && $key == (int)$key) {
+                    $key = "key_$key";
+                }
+
+                $object->addChild($key, $value);
+            }
+        }
     }
 }

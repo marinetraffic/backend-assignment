@@ -19,7 +19,7 @@ class PositionSeeder extends Seeder
      */
     public function run()
     {
-        Position::truncate();
+        //Position::truncate();
 
         $json_positions = File::get("database/data/ship_positions.json");
 

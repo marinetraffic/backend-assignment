@@ -13,7 +13,6 @@ class Position extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'status' => 'boolean',
-        'timestamp' => 'datetime',
+        'status' => 'boolean'
     ];
 }
