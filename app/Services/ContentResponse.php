@@ -20,7 +20,7 @@ class ContentResponse
     {
         $contentType = request()->getContentType();
 
-        dump($contentType);
+
         if (is_null($contentType)) {
             $checkHeader = request()->header();
 
@@ -28,9 +28,10 @@ class ContentResponse
 
             if (is_array($isContentType)) {
                 $isCsv = empty($isContentType[0]) ? null : $isContentType[0];
-dump($isCsv);
+
                 $contentType = is_null($isCsv) ? 'json' : last(explode('/', $isCsv));
-                dump($contentType);
+            } else {
+                $contentType = 'json';
             }
         }
 
