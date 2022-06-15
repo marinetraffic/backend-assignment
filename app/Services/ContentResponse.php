@@ -40,6 +40,7 @@ class ContentResponse
     public function handle($value): \Illuminate\Http\Response|StreamedResponse
     {
         if (method_exists($this, $handler = 'handle' . ucwords($this->type))) {
+            dd($handler);
             return $this->{$handler}($value);
         }
 
