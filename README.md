@@ -1,40 +1,92 @@
-# Vessels Tracks API
+<p align="center">Returns product recommendations depending on current weather.</p>
+<p align="center"><a href="https://infinitypaul.medium.com">Creator</a> | <a href="https://marinetask.herokuapp.com/api/position">Demo URL</a></p>
 
-Your task is to create a **RESTful API** that serves vessel tracks from a raw vessel positions data-source.
-The raw data is supplied as a JSON file that you must import to a database schema of your choice.
+## Tech Stack
 
-Fields supplied are:
-* **mmsi**: unique vessel identifier
-* **status**: AIS vessel status
-* **station**: receiving station ID
-* **speed**: speed in knots x 10 (i.e. 10,1 knots is 101)
-* **lon**: longitude
-* **lat**: latitude
-* **course**: vessel's course over ground
-* **heading**: vessel's true heading
-* **rot**: vessel's rate of turn
-* **timestamp**: position timestamp
+* Laravel
+* Mysql
+* PHP
 
-**The API end-point must:**
-* Support the following filters: 
-  * **mmsi** (single or multiple)
-  * **latitude** and **longitude range**
-  * as well as **time interval**.
-* Log incoming requests to a datastore of  your choice (plain text, database, third party service etc.)
-* Limit requests per user to **10/hour**. (Use the request remote IP as a user identifier)
-* Support the following content types:
-  * At least two of the following: application/json, application/vnd.api+json, application/ld+json, application/hal+json
-  * application/xml
-  * text/csv
+## Download Instruction
 
-**Share your work:**
-* Stage your solution on a demo page or
-* Fork this repo and create a pull request that contains your implementation in a new branch named after you.
+1. Clone the project.
+
+```
+git clone https://github.com/infinitypaul/backend-assignment.git projectname
+```
 
 
-**Notes:** 
-* Please include your Tests with your source code
-* Include instructions
-* Feel free to use the framework, libraries of your choice or plain PHP to implement the assignment
+2. Install dependencies via composer.
 
-**Have fun!**
+```
+composer install 
+```
+
+3. Migrate and seed the Database.
+
+```
+php artisan migrate --seed
+```
+
+4. Run php server.
+
+```
+php artisan serve
+```
+
+
+## Api Usage
+
+### Base URL
+```
+https://marinetask.herokuapp.com
+```
+
+#### List All Record:
+
+```
+https://marinetask.herokuapp.com/api/position
+```
+
+## Filter Conditions
+
+### By MMSI
+
+##### Single MMSI
+
+```phpregexp
+https://marinetask.herokuapp.com/api/position?mmsi=311040700
+```
+
+##### Multiple MMSI
+
+```phpregexp
+https://marinetask.herokuapp.com/api/position?mmsi=311040700,311486000
+```
+
+### By Time Inverter
+
+```phpregexp
+https://marinetask.herokuapp.com/api/position?time=2013-07-01T13:06:00,2013-07-01T10:06:00
+```
+
+### By Longitude And Latitude
+
+```phpregexp
+https://marinetask.herokuapp.com/api/position?latlong={latitude},{longitude}
+https://marinetask.herokuapp.com/api/position?latlong=33.5577600,34.6411200
+```
+
+it can also accept multiple filter condition
+
+```phpregexp
+https://marinetask.herokuapp.com/api/position?latlong=33.5577600,34.6411200&time=2013-07-01T13:06:00,2013-07-01T10:06:00&mmsi=311040700,311486000&page=1
+```
+
+
+
+And Viola, You have the response in front of you.
+
+Enjoy!!
+
+
