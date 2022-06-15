@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('mmsi');
-            $table->boolean('status')->default(false);
+            $table->integer('status')->default(0);
             $table->integer('station_id');
             $table->integer('speed');
             $table->decimal('longitude', 10, 7);
