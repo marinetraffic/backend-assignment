@@ -14,7 +14,7 @@ class LatLongFilter implements FilterContracts
     /**
      * @throws Exception
      */
-    public function apply(Builder $builder, $value)
+    public function apply(Builder $builder, $value): Builder
     {
         $explodedValues = array_filter(explode(',', $value));
 
