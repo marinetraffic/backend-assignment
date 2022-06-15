@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Position;
+use Carbon\Carbon;
 use Tests\TestCase;
 
 class PositionTest extends TestCase
@@ -78,7 +79,7 @@ class PositionTest extends TestCase
     public function test_for_rate_limiting(){
         $response = $this->call('GET', '/api/position');
         $header_value = $response->headers->get('X-Ratelimit-Limit');
-        $this->assertEquals(10, $header_value);
+        $this->assertEquals(60, $header_value);
     }
 
     public function test_check_if_log_was_written(){
@@ -119,6 +120,38 @@ class PositionTest extends TestCase
         ]);
 
         $response->assertHeader('content-type', 'text/csv; charset=UTF-8');
+    }
+
+    public function test_for_time_interval(){
+        $firstPosition = Position::factory()->create([
+            'timestamp' => now()->timestamp
+        ]);
+
+        $secondPosition = Position::factory()->create([
+            'timestamp' => now()->addMinutes(20)->timestamp
+        ]);
+
+        $thirdPosition = Position::factory()->create([
+            'timestamp' => now()->addMinutes(40)->timestamp
+        ]);
+
+        $firstTimestamp = Carbon::parse($secondPosition->timestamp)->toDateTimeString();
+        $secondTimestamp = Carbon::parse($thirdPosition->timestamp)->toDateTimeString();
+
+        $response = $this->getJson('/api/position?time='.$secondTimestamp.','.$firstTimestamp);
+
+        $response->assertStatus(200)->assertJson([
+            'current_page' => 1,
+            'data' => [
+                0 => [
+                    'mmsi' => $secondPosition->mmsi
+                ],
+                1 => [
+                    'mmsi' => $thirdPosition->mmsi
+                ]
+            ]
+        ]);
+
     }
 
 

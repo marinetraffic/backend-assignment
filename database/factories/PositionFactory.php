@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,6 +17,8 @@ class PositionFactory extends Factory
      */
     public function definition()
     {
+        $starts_at = Carbon::createFromTimestamp($this->faker->dateTimeBetween($startDate = '+2 days', $endDate = '+1 week')->getTimeStamp()) ;
+
         return [
             'mmsi' => $this->faker->randomNumber(9),
             'status' => $this->faker->randomElement([0,1,3,4,5]),
@@ -26,7 +29,7 @@ class PositionFactory extends Factory
             'course' => $this->faker->numberBetween(100, 999),
             'heading' => $this->faker->numberBetween(1, 999),
             'rot' => "",
-            'timestamp' => time(),
+            'timestamp' => Carbon::createFromFormat('Y-m-d H:i:s', $starts_at)->addHours( 1)->timestamp,
         ];
     }
 }
