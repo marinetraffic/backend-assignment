@@ -20,13 +20,16 @@ class ContentResponse
     {
         $contentType = request()->getContentType();
 
+
         if (is_null($contentType)) {
             $checkHeader = request()->header();
+
             $isContentType = $checkHeader['content-type'] ?? null;
 
             if (is_array($isContentType)) {
-                $isCsv = $isContentType[0] ?? null;
-                $contentType = last(explode('/', $isCsv));
+                $isCsv = empty($isContentType[0]) ? null : $isContentType[0];
+
+                $contentType = is_null($isCsv) ? 'json' : last(explode('/', $isCsv));
             }
         }
 
