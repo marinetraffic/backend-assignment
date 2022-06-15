@@ -46,12 +46,12 @@ class ContentResponse
 
     protected function handleJson($value): \Illuminate\Http\Response
     {
-        return Response::make($value->paginate(100)->withQueryString())->header('Content-Type', 'application/json');
+        return Response::make($value->paginate(10)->withQueryString())->header('Content-Type', 'application/json');
     }
 
     protected function handleJsonld($value): \Illuminate\Http\Response
     {
-        return Response::make($value->paginate(100)->withQueryString())->header('Content-Type', 'application/ld+json');
+        return Response::make($value->paginate(10)->withQueryString())->header('Content-Type', 'application/ld+json');
     }
 
     protected function handleXml($value): \Illuminate\Http\Response
