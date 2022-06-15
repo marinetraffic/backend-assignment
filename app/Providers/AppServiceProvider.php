@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\ContentResponse;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Response;
 
@@ -31,5 +32,8 @@ class AppServiceProvider extends ServiceProvider
             return (new ContentResponse())->handle($value);
 
         });
+
+        //Heroku Support
+        Schema::defaultStringLength(191);
     }
 }

@@ -27,6 +27,7 @@ class LatLongFilter implements FilterContracts
         return $builder->select("*", \DB::raw("6371 * acos(cos(radians(" . $latitude . "))
              * cos(radians(latitude)) * cos(radians(longitude) - radians(" . $longitude . "))
              + sin(radians(" .$latitude. ")) * sin(radians(latitude))) AS distance"))
+            ->having('distance', '<', 1000)
             ->orderBy('distance');
     }
 }
