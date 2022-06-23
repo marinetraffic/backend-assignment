@@ -1,4 +1,4 @@
-<p align="center">Returns product recommendations depending on current weather.</p>
+<p align="center">Marine Traffic.</p>
 <p align="center"><a href="https://infinitypaul.medium.com">Creator</a> | <a href="https://marinetask.herokuapp.com/api/position">Demo URL</a></p>
 
 ## Tech Stack
