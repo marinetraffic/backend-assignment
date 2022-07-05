@@ -35,6 +35,12 @@ return [
     */
 
     'channels' => [
+        'user_requests' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/user_requests.log'),
+            'tap' => [App\Logging\LoggingFormatter::class],
+            'level' => 'info',
+        ],
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
@@ -98,7 +104,7 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
-        ],
+        ]
     ],
 
 ];
