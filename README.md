@@ -18,15 +18,19 @@ developed by Kleomenis Chatzigeorgiou
      - DB_DATABASE=
      - DB_USERNAME=
      - DB_PASSWORD=
-4) in order to migrate vessel data to the database, the file that contains the data must be name "ship_positions.json". It alson needs to be places at storage/app folder
-5) run php artisan migrate 
-6) run php artisan db:seed to migrate the vessel data
+4) run php artisan key:generate in order to generate an application key
+5) in order to migrate vessel data to the database, the file that contains the data must be name "ship_positions.json". It alson needs to be places at storage/app folder
+6) run php artisan migrate 
+7) run php artisan db:seed to migrate the vessel data
 
 #### Tests
 This project comes with a variety of unit tests. You can execute them by runing "php artisan test" in your terminal.
 
 ##API Documentation:
 The url for API requests is : "<your_application_url>/api/position". For example if you are hosting the site through artisan (with php artisan serve command), the url is http://127.0.0.1:8000/api/position
+#####Requests and Loging
+Users are limited to 10 requests per hour. Moreover, every request is stored using a .log file called "user_requests.log". The file will be created when the api receives the first request.
+
 #####Features
 You can retrieve info about vessels by sending GET requests to the api. You can also filter data by mmsi (multiple or single comma seperated), date range and latitude and longitude. Moreover, you can combine all the filters together.
 
@@ -51,5 +55,4 @@ The default format is application/json. If you want to get  the response in anot
 - Get all records filtering by latitude and longitude :http://127.0.0.1:8000/api/position?latlong=43.9751000,14.1760300
 - Get all records filtering by time interval http://127.0.0.1:8000/api/position?time=2013-07-01T16:05:05,2014-03-01T16:05:05
 - Get all records filtering by mssi and latitude and longitude http://127.0.0.1:8000/api/position?mmsi=247039300,311486000&time=2013-07-01T16:05:05,2014-03-01T16:05:05
-
 
