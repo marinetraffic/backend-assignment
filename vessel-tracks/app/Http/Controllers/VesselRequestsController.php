@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShipPosition;
+use App\Services\ContentTypeService;
 use App\Services\FiltersService;
 use App\Services\LogService;
 use Illuminate\Http\Request;
@@ -20,6 +21,13 @@ class VesselRequestsController extends Controller
     public function getPosition(Request $request) {
 
         LogService::handle($request);
-        return FiltersService::handle($request);;
+
+        $data = FiltersService::handle($request);
+        if ($data->isEmpty()) { return 'No data found'; }
+        $data = ContentTypeService::handle($data, $request);
+
+        return $data;
+
+
     }
 }
