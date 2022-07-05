@@ -70,6 +70,7 @@ trait ShipPositionTraits{
             $long = floatval($latLongExplode[1]);
 
             return $query->where('longitude', $long)->where('latitude', $lat);
+            
         } catch (\Exception $e) {
             throw new HttpResponseException(response()->json([
                 'success' => false,

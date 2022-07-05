@@ -16,13 +16,14 @@ class VesselRequestsController extends Controller
     public $filtersService;
 
     public function __contruct(FiltersService $filtersService) {
+
         $this->filtersService = $filtersService;
+
     }
 
     public function getPosition(Request $request) {
 
         LogService::handle($request);
-
         $data = FiltersService::handle($request);
 
         if($data instanceof Collection){
@@ -31,7 +32,6 @@ class VesselRequestsController extends Controller
         }
 
         $data = ContentTypeService::handle($data, $request);
-
         return $data;
 
 

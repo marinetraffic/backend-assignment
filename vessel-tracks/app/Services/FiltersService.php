@@ -22,8 +22,6 @@ class FiltersService{
             $query = $query->get()->makeHidden(['created_at','updated_at' ]);
         }
 
-        ContentTypeService::handle($query, $request);
-
         return $query;
 
     }
