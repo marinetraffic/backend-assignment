@@ -3,7 +3,7 @@ namespace App\Models\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Http\Exceptions\HttpResponseException;
 trait ShipPositionTraits{
 
     public function scopeFilterByMmsi($query, $mmsi)
@@ -15,31 +15,46 @@ trait ShipPositionTraits{
 
     public function scopeFilterByTime($query, $time)
     {
-        $errMessage = 'Invalid date format. Please check your values and try again';
+        $wrongDateFormat = 'Invalid date format. Please check your values and try again';
 
         $timeInterval = explode(',',$time);
 
         if(count($timeInterval) !== 2){
-            throw new Exception($errMessage);
+            if (!empty($errors['errors'])) {
+                throw new HttpResponseException(response()->json([
+                    'success' => false,
+                    'message' =>$wrongDateFormat
+                ], 422));
+            }
         }
 
         /* Check if data is date */
-        $test=\DateTime::createFromFormat('Y-m-d\TH:i:s', $timeInterval[0]);
+        \DateTime::createFromFormat('Y-m-d\TH:i:s', $timeInterval[0]);
         $errors = \DateTime::getLastErrors();
         if (!empty($errors['errors'])) {
-            throw new \Exception($errMessage);
+            throw new HttpResponseException(response()->json([
+                'success' => false,
+                'message' =>$wrongDateFormat
+            ], 422));
         }
+
         \DateTime::createFromFormat('Y-m-d\TH:i:s', $timeInterval[1]);
         $errors = \DateTime::getLastErrors();
         if (!empty($errors['errors'])) {
-            throw new \Exception($errMessage);
+            throw new HttpResponseException(response()->json([
+                'success' => false,
+                'message' =>$wrongDateFormat
+            ], 422));
         }
 
         $timeFrom = Carbon::parse($timeInterval[0])->timestamp;
         $timeTo = Carbon::parse($timeInterval[1])->timestamp;
 
         if($timeFrom > $timeTo){
-            throw new Exception($errMessage);
+            throw new HttpResponseException(response()->json([
+                'success' => false,
+                'message' =>'End date must be bigger than start date'
+            ], 422));
         }
 
         return $query->whereBetween('timestamp',[$timeFrom, $timeTo]);
@@ -47,18 +62,21 @@ trait ShipPositionTraits{
 
     public function scopeFilterBylatlong($query, $latlong)
     {
-        $latLongExplode = explode(',',$latlong);
 
-        if(array_key_exists(1,$latLongExplode)){
+        $latLongExplode = explode(',', $latlong);
 
-            $lat = $latLongExplode[0];
-            $long = $latLongExplode[1];
+        try {
+            $lat = floatval($latLongExplode[0]);
+            $long = floatval($latLongExplode[1]);
 
-            return $query->where('longitude',$long)->where('latitude',$lat);
+            return $query->where('longitude', $long)->where('latitude', $lat);
+        } catch (\Exception $e) {
+            throw new HttpResponseException(response()->json([
+                'success' => false,
+                'message' =>'Invalid longitude and latitude data'
+            ], 422));
+
         }
-        else{
-            throw new \Exception('Lattitude and Longitude is not on the correct format. Please check your values and try again');
-        }
+
     }
-
 }

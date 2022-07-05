@@ -16,15 +16,11 @@ class FiltersService{
 
         foreach ($params as $key => $value) {
             $filter = 'filterBy'.$key;
-            try{
-                $query = ShipPosition::$filter($value)->get()->makeHidden(['created_at','updated_at' ]);
-            }
-            catch (\Exception $exception){
-                return $exception->getMessage();
-            }
+
+            $query = ShipPosition::$filter($value);
+
+            $query = $query->get()->makeHidden(['created_at','updated_at' ]);
         }
-
-
 
         ContentTypeService::handle($query, $request);
 
