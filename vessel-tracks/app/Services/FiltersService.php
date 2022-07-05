@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class FiltersService{
 
     public function handle(Request $request) {
+        
         $params = $request->only('mmsi','time','latlong');
         $query = ShipPosition::all();
 
