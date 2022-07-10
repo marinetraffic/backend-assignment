@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tracks', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('mmsi');
             $table->integer('status');
             $table->unsignedBigInteger('stationId');
