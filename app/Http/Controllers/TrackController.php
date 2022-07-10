@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TrackFilterException;
 use App\Http\Requests\TrackCreateRequest;
+use App\Http\Requests\TrackFilterRequest;
 use App\Http\Resources\TrackResourse;
 use App\Models\Track;
+use App\TrackFilterer;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TrackController extends Controller
 {
-    public function index()
+    public function index(TrackFilterRequest $request)
     {
-        $tracks = Track::paginate();
+        $tracks = TrackFilterer::make($request)->apply()->get();
         return TrackResourse::collection($tracks);
     }
 
