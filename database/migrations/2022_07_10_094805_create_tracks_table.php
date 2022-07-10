@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('lat');
             $table->integer('course');
             $table->integer('heading');
-            $table->string("rot")->default("");
+            $table->string("rot")->nullable();
             $table->unsignedInteger("timestamp");
         });
     }

@@ -4,23 +4,24 @@
 namespace App;
 
 use App\Models\Track;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 
 class TrackFilterer
 {
-    private $query;
-    private $mmsi;
-    private $lon_range;
-    private $lat_range;
-    private $interval;  //in seconds
+    private Builder $query;
+    private array $mmsi;
+    private array $lon_range;
+    private array $lat_range;
+    private array $interval;
 
     public static function make(Request $request)
     {
         return new TrackFilterer($request);
     }
 
-    private function __construct($request)
+    private function __construct(Request $request)
     {
         $this->query = Track::query();
         $this->mmsi = $request->input('mmsi');
