@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+    api:
+        container_name: vessel_api
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - 8000:8000
+        volumes:
+            - .:/app
+        depends_on:
+            - db
+        networks:
+            - app
+    db:
+        container_name: vessel_db
+        image: mysql:5.7.22
+        environment:
+            MYSQL_DATABASE: vessel_db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
+        volumes:
+            - .dbdata:/var/lib/mysql
+        ports:
+            - 33066:3306
+        networks:
+            - app
+networks:
+    app:
