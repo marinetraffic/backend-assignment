@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 class PopulateDBCommand extends Command
 {
-    protected $signature = 'populate:db';
+    protected $signature = 'db:populate';
     protected $description = 'Parses the JSON file and populates the database';
 
     public function handle()

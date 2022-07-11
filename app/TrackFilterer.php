@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 
 class TrackFilterer
 {
-    private Builder $query;
-    private array $mmsi;
-    private array $lon_range;
-    private array $lat_range;
-    private array $interval;
+    private $query;
+    private $mmsi;
+    private $lon_range;
+    private $lat_range;
+    private $interval;
 
     public static function make(Request $request)
     {
