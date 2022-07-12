@@ -8,6 +8,7 @@ use App\Http\Requests\TrackFilterRequest;
 use App\Http\Resources\TrackResourse;
 use App\Models\Track;
 use App\TrackFilterer;
+use \Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TrackController extends Controller
@@ -85,5 +86,13 @@ class TrackController extends Controller
     {
         Track::destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function test(Request $request){
+        dd($request['xml']);
+        //$request->header('Content-Type') == "application/xml"
+        //$xmlTrack = $request->getContent();
+
+
     }
 }

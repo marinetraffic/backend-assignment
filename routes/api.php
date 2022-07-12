@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource("tracks", TrackController::class);
+
+Route::post("test", [TrackController::class, "test"]);
