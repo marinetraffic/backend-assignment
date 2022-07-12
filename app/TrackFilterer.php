@@ -4,7 +4,6 @@
 namespace App;
 
 use App\Models\Track;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 
@@ -16,6 +15,12 @@ class TrackFilterer
     private $lat_range;
     private $interval;
 
+    /**
+     * Creates an instance of this class
+     *
+     * @param Request $request
+     * @return TrackFilterer
+     */
     public static function make(Request $request)
     {
         return new TrackFilterer($request);
@@ -30,6 +35,11 @@ class TrackFilterer
         $this->interval = $request->input('interval');
     }
 
+    /**
+     * Creates a proper Query according to the requested filters
+     *
+     * @return $this
+     */
     public function apply()
     {
         if($this->mmsi){
@@ -50,7 +60,13 @@ class TrackFilterer
         return $this;
     }
 
-    public function get(){
+    /**
+     * Gets the tracks from the database by executing the built Query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function get()
+    {
         return $this->query->get();
     }
 }

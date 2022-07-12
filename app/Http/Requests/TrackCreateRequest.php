@@ -22,7 +22,6 @@ class TrackCreateRequest extends FormRequest
             'lat' => 'required|numeric|between:-90,90',
             'course' => 'required|numeric',
             'heading' => 'required|numeric',
-            'rot' => 'required',
             'timestamp' => 'required|numeric',
         ];
     }
