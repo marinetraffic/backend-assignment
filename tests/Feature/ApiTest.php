@@ -88,7 +88,7 @@ class ApiTest extends TestCase
     }
 
     /**
-     * Tests the filtering process. At first, it creates some tracks and then requests them by
+     * Tests the filtering process. At first, it generates some tracks and then requests them by
      * - the mmsi
      * - the position
      * - and the interval
@@ -97,6 +97,7 @@ class ApiTest extends TestCase
      */
     public function test_filtering()
     {
+
         $this->setUpFaker();
         $num= 10;
         $starting_lat = 0;
