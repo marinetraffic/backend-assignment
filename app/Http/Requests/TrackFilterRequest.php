@@ -24,7 +24,7 @@ class TrackFilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'mmsi' => 'array',
+            'mmsi' => 'array|min:1',
             'mmsi.*' => 'numeric',
             'lat_range' => 'array|min:2|max:2',
             'lat_range.*' => 'numeric',
