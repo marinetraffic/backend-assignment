@@ -16,13 +16,13 @@ The total application can be easily build and deployed using Docker.
 
 The api and the database can be easily build by running:
 
-```
+```shell script
 docker-compose build
 docker-compose up
 ```
 
 To create the database schema and to populate it by the track data, run:
-```
+```shell script
 docker exec -it vessel_api php artisan app:setup
 ```
 
@@ -81,6 +81,28 @@ Controller have to pass from it. There, it stores the request in the database, a
  in order to suit with the controllers needs.
  
  The name of this middleware is: `ContentTypeMiddleware.php`
+ 
+ An example of the accepted XML is:
+ ```xml
+ <track>
+     <mmsi>247039300</mmsi>
+     <status>0</status>
+     <stationId>81</stationId>
+     <speed>180</speed>
+     <lon>15.4415</lon>
+     <lat>42.75178</lat>
+     <course>144</course>
+     <heading>144</heading>
+     <rot>xx</rot>
+     <timestamp>1372683960</timestamp>
+ </track>
+```
+
+and of a CSV is:
+```csv
+mmsi,status,stationId,speed,lon,lat,course,heading,rot,timestamp
+123456789,1,54,122,15,16,142,144,?,1372683960
+```
 
 ### Integration Tests
 
