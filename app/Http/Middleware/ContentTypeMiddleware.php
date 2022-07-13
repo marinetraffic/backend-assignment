@@ -8,8 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContentTypeMiddleware
 {
-    private static $XML_CONTENT_TYPE = "application/xml";
-    private static $CSV_CONTENT_TYPE = "application/csv";
+    private static $XML_CONTENT_TYPE = 'application/xml';
+    private static $CSV_CONTENT_TYPE = 'application/csv';
+    private static $JSON_API__CONTENT_TYPE = 'application/vnd.api+json';
+
 
 
     public function handle(Request $request, Closure $next)
@@ -30,6 +32,10 @@ class ContentTypeMiddleware
                     return response("Invalid CSV", Response::HTTP_BAD_REQUEST);
                 $arr = array_combine(str_getcsv($lines[0]), str_getcsv($lines[1]));
                 $request->merge($arr);
+            }
+            elseif($request->header('Content-Type') == self::$JSON_API__CONTENT_TYPE)
+            {
+                $request['json+api'] = true;
             }
         }
 

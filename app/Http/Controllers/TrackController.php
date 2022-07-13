@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\TrackFilterException;
 use App\Http\Requests\TrackCreateRequest;
 use App\Http\Requests\TrackFilterRequest;
-use App\Http\Resources\TrackResourse;
+use App\Http\Resources\TrackResource;
 use App\Models\Track;
+use App\ResponseManager;
 use App\TrackFilterer;
 use \Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,24 +17,25 @@ class TrackController extends Controller
      * Returns the tracks according to the provided filters.
      *
      * @param TrackFilterRequest $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function index(TrackFilterRequest $request)
     {
         $tracks = TrackFilterer::make($request)->apply()->get();
-        return TrackResourse::collection($tracks);
+        return ResponseManager::respond($request, TrackResource::collection($tracks), Response::HTTP_CREATED, true);
     }
 
     /**
      * Returns the track with the given id.
      *
+     * @param Request $request
      * @param $id
-     * @return TrackResourse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $track = Track::findOrFail($id);
-        return new TrackResourse($track);
+        return ResponseManager::respond($request, new TrackResource($track), Response::HTTP_CREATED, false);
     }
 
     /**
@@ -48,7 +49,7 @@ class TrackController extends Controller
         $track = Track::create(
             $request->only('mmsi', 'status', 'stationId', 'speed', 'lon', 'lat', 'course', 'heading', 'rot', 'timestamp')
         );
-        return response(new TrackResourse($track), Response::HTTP_CREATED);
+        return ResponseManager::respond($request, new TrackResource($track), Response::HTTP_CREATED, false);
     }
 
     /**
@@ -73,7 +74,7 @@ class TrackController extends Controller
             'rot' => $request->input('rot'),
             'timestamp' => $request->input('timestamp'),
         ]);
-        return response(new TrackResourse($track), Response::HTTP_ACCEPTED);
+        return ResponseManager::respond($request, new TrackResource($track), Response::HTTP_ACCEPTED, false);
     }
 
     /**
@@ -86,13 +87,5 @@ class TrackController extends Controller
     {
         Track::destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
-    }
-
-    public function test(Request $request){
-        dd($request['xml']);
-        //$request->header('Content-Type') == "application/xml"
-        //$xmlTrack = $request->getContent();
-
-
     }
 }
