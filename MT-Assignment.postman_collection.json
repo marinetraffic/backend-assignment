@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "7f14258c-b714-44d6-83e9-ba0a07f7fa17",
+		"name": "MT-Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5678860"
+	},
+	"item": [
+		{
+			"name": "Create Track XML",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<track>\n    <mmsi>247039300</mmsi>\n    <status>0</status>\n    <stationId>81</stationId>\n    <speed>180</speed>\n    <lon>15.4415</lon>\n    <lat>42.75178</lat>\n    <course>144</course>\n    <heading>144</heading>\n    <rot>\"\"</rot>\n    <timestamp>137268396</timestamp>\n</track>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Track XML",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<track>\n    <mmsi>247039300</mmsi>\n    <status>0</status>\n    <stationId>81</stationId>\n    <speed>180</speed>\n    <lon>15.4415</lon>\n    <lat>42.75178</lat>\n    <course>144</course>\n    <heading>144</heading>\n    <rot>xx</rot>\n    <timestamp>1372683960</timestamp>\n</track>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks/2699",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks",
+						"2699"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Track CSV",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/csv",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mmsi,status,stationId,speed,lon,lat,course,heading,rot,timestamp\n123456789,1,54,122,15,16,142,144,?,1372683960",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Track XML Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/csv",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mmsi,status,stationId,speed,lon,lat,course,heading,timestamp\n123456789,1,54,122,15,16,142,144,1372683960",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks/2699",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks",
+						"2699"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Track JSON",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mmsi",
+							"value": "247039313",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "stationId",
+							"value": "55",
+							"type": "text"
+						},
+						{
+							"key": "speed",
+							"value": "180",
+							"type": "text"
+						},
+						{
+							"key": "lon",
+							"value": "40",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "course",
+							"value": "144",
+							"type": "text"
+						},
+						{
+							"key": "heading",
+							"value": "132",
+							"type": "text"
+						},
+						{
+							"key": "rot",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "timestamp",
+							"value": "1372683960",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Track JSON",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "speed",
+							"value": "185",
+							"type": "text"
+						},
+						{
+							"key": "lon",
+							"value": "40",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "course",
+							"value": "144",
+							"type": "text"
+						},
+						{
+							"key": "heading",
+							"value": "132",
+							"type": "text"
+						},
+						{
+							"key": "rot",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "timestamp",
+							"value": "1372683960",
+							"type": "text"
+						},
+						{
+							"key": "mmsi",
+							"value": "247039313",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "stationId",
+							"value": "55",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks/2700",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks",
+						"2700"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index Tracks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index Tracks with Filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks?mmsi[]=311040700&lon_range[]=30&lon_range[]=45&lat_range[]=10&lat_range[]=50",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks"
+					],
+					"query": [
+						{
+							"key": "mmsi[]",
+							"value": "311040700"
+						},
+						{
+							"key": "lon_range[]",
+							"value": "30"
+						},
+						{
+							"key": "lon_range[]",
+							"value": "45"
+						},
+						{
+							"key": "lat_range[]",
+							"value": "10"
+						},
+						{
+							"key": "lat_range[]",
+							"value": "50"
+						},
+						{
+							"key": "interval[]",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "interval[]",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Tack by Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tack by Id Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<track>\n<mmsi>247039300</mmsi>\n<status>0</status>\n<stationId>81</stationId>\n<speed>180</speed>\n<lon>15.4415</lon>\n<lat>42.75178</lat>\n<course>144</course>\n<heading>144</heading>\n<rot>\"\"</rot>\n<timestamp>1372683960</timestamp>\n</track>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tracks/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tracks",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/api/test",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

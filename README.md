@@ -3,19 +3,18 @@
 # Implementation 
 By **Theodore Mandilaras**
 
-The implementation of this API, was done using the Laravel Framework. More specifically:
+This API was implemented with the Laravel Framework. More specifically:
 
 - PHP Version: 8.0
 - Laravel Version: 9.1
 
-As for the database I used MySQL, which gets migrated and populated by the api.
+As for the database I used MySQL, which gets migrated and populated by the API.
 
-The total application can be easily build and deployed using Docker.
+The application can be easily build and deployed using Docker.
    
 ## Setup
 
-The api and the database can be easily build by running:
-
+The api and the database can be build by running:
 ```shell script
 docker-compose build
 docker-compose up
@@ -25,6 +24,8 @@ To create the database schema and to populate it by the track data, run:
 ```shell script
 docker exec -it vessel_api php artisan app:setup
 ```
+
+The application can be found at: `localhost:8000`. 
 
 ## Database Schema
 
@@ -55,16 +56,17 @@ The migration files for both of the tables can be found at `database/migrations`
 ### CRUD 
 
 The logic of the CRUD operations along with the requested filters can be found at `app/Http/Controllers/TaskController.php`,
-For the filtering of the data, I developed a service which uses the Query Builder of Laravel, in
-order to create the proper SQL statement for the requested filters.
-
-The name of this Service is `TrackFilterer.php`.
+For the filtering of the data, I developed a service which uses the Query Builder of Laravel. This service builds the proper SQL statement according to the requested filters. The name of this service is `TrackFilterer.php`.
 
 To filter, the client has to provide one of the below params in the URL:
 - mmsi: an array with one or more mmsis
 - lon_range: an array with the min and max lon values. It must have exact 2 elements.
 - lat_range: an array with the min and max lat values. It must have exact 2 elements.
 - interval: an array with the starting and ending timestamps of interest. It must have exact 2 elements.
+
+For example:
+
+`localhost:8000/api/tracks?mmsi[]=311040700&lon_range[]=30&lon_range[]=45&lat_range[]=10&lat_range[]=50`
 
 ### Request Logging
 
@@ -73,7 +75,7 @@ Controller have to pass from it. There, it stores the request in the database, a
 
  ### Rate Limiting
  
- The rate limiting is configured in the `app/Providers/RouteServiceProvider.php` file.
+ The rate limiting is configured at the `app/Providers/RouteServiceProvider.php` file.
  
  ### Support Different Content Types
  
@@ -116,7 +118,7 @@ For testing, I use a memory-stored SQLite database, which is migrated and popula
 
 ### Last
 
-To better evaluate the API, an Postman Collection is provided in the project.
+To better evaluate the API, a Postman Collection can be found [here](./MT-Assignment.postman_collection.json)
 
 If there is any issue in setting up or testing this api, please don't hesitate to ask me.
 
