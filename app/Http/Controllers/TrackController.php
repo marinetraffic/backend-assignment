@@ -22,7 +22,7 @@ class TrackController extends Controller
     public function index(TrackFilterRequest $request)
     {
         $tracks = TrackFilterer::make($request)->apply()->get();
-        return ResponseManager::respond($request, TrackResource::collection($tracks), Response::HTTP_CREATED, true);
+        return ResponseManager::respond($request, TrackResource::collection($tracks), Response::HTTP_OK, true);
     }
 
     /**
@@ -35,7 +35,7 @@ class TrackController extends Controller
     public function show(Request $request, $id)
     {
         $track = Track::findOrFail($id);
-        return ResponseManager::respond($request, new TrackResource($track), Response::HTTP_CREATED, false);
+        return ResponseManager::respond($request, new TrackResource($track), Response::HTTP_OK, false);
     }
 
     /**
