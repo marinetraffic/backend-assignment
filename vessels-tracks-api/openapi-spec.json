@@ -1,0 +1,289 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "ainp2egp46n12"
+  },
+  "info": {
+    "title": "vessels-tracks-api",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/ShipPosition": {
+      "parameters": [],
+      "get": {
+        "summary": "",
+        "operationId": "get-ShipPosition",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipPosition"
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests"
+          }
+        },
+        "x-internal": true,
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "MMSI",
+            "description": "Unique Vessel Identifier"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "MaxLon",
+            "description": "Maximum Longtitude value"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "MinLon",
+            "description": "Minimum Longtitude value"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "MaxLat",
+            "description": "Maximum Latitude value"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "MinLat",
+            "description": "Minimum Latitude value"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "MaxTimestamp",
+            "description": "Maximum Timestamp value"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "MinTimestamp",
+            "description": "Minimum Timestamp value"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json",
+                "application/xml",
+                "text/csv"
+              ]
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "The content type that is given"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MMSI": {
+                    "type": "integer"
+                  },
+                  "MaxLon": {
+                    "type": "number"
+                  },
+                  "MinLon": {
+                    "type": "number"
+                  },
+                  "MaxLat": {
+                    "type": "number"
+                  },
+                  "MinLat": {
+                    "type": "number"
+                  },
+                  "MaxTimestamp": {
+                    "type": "integer"
+                  },
+                  "MinTimestamp": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "MMSI": 247039300,
+                    "MinTimestamp": 1372683960
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MMSI": {
+                    "type": "integer"
+                  },
+                  "MaxLon": {
+                    "type": "number"
+                  },
+                  "MinLon": {
+                    "type": "number"
+                  },
+                  "MaxLat": {
+                    "type": "number"
+                  },
+                  "MinLat": {
+                    "type": "number"
+                  },
+                  "MaxTimestamp": {
+                    "type": "integer"
+                  },
+                  "MinTimestamp": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": "<root>\n  <MMSI>247039300</MMSI>\n  <MinTimestamp>1372683960</MinTimestamp>\n</root>"
+                }
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MMSI": {
+                    "type": "integer"
+                  },
+                  "MaxLon": {
+                    "type": "number"
+                  },
+                  "MinLon": {
+                    "type": "number"
+                  },
+                  "MaxLat": {
+                    "type": "number"
+                  },
+                  "MinLat": {
+                    "type": "number"
+                  },
+                  "MaxTimestamp": {
+                    "type": "integer"
+                  },
+                  "MinTimestamp": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": "MMSI,MinTimestamp 247039300,1372683960"
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ShipPosition": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "mmsi": 247039300,
+            "status": 0,
+            "stationId": 81,
+            "speed": 180,
+            "lon": 15.4415,
+            "lat": 42.75178,
+            "course": 144,
+            "heading": 144,
+            "rot": "",
+            "timestamp": 1372683960
+          }
+        },
+        "properties": {
+          "mmsi": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "integer"
+          },
+          "stationId": {
+            "type": "integer"
+          },
+          "speed": {
+            "type": "integer"
+          },
+          "lon": {
+            "type": "number"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "course": {
+            "type": "integer"
+          },
+          "heading": {
+            "type": "integer"
+          },
+          "rot": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer"
+          }
+        },
+        "examples": [
+          {
+            "mmsi": 247039300,
+            "status": 0,
+            "stationId": 81,
+            "speed": 180,
+            "lon": 15.4415,
+            "lat": 42.75178,
+            "course": 144,
+            "heading": 144,
+            "rot": "",
+            "timestamp": 1372683960
+          }
+        ],
+        "title": "ShipPosition"
+      }
+    }
+  }
+}

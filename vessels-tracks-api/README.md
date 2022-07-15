@@ -1,64 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Setup Repo
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Run the commands below, inside a terminal that is open in vessels-tracks-api directory.
 
-## About Laravel
+`./vendor/bin/sail up` to start the project
+`./vendor/bin/sail artisan migrate:fresh --seed` to create the database schema and insert the data from the json
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# How to use the API
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The only REST API Endpoint is /ShipLocation (eg. localhost/ShipLocation)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+When we call it without any parameters or headers, it will return the whole dataset.
 
-## Learning Laravel
+The REST API Endpoint /ShipLocation was created to use the properties below as query parameters, json properties, xml tags or csv records.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+MMSI integer You can send multiple MMSIs and the endpoint will return their union
+MaxLon float Maximum Longtitude value
+MinLon float Minimum Longtitude value
+MaxLat float Maximum Latitude value
+MinLat float Minimum Latitude value
+MaxTimestamp integer Maximum Timestamp value
+MinTimestamp integer Minimum Timestamp value
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+These are all optional.
 
-## Laravel Sponsors
+examples:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Query Parameters
 
-### Premium Partners
+To find the Vessel tracks locations for mmsi 247039300 after timestamp 1372683960 we can call:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+http://localhost/api/ShipPosition?MMSI=247039300&MinTimestamp=1372683960
 
-## Contributing
+## JSON
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Send your GET request to http://localhost/api/ShipPosition
+2. Add a json as request body
+3. Set Content-Type header = application/json:
 
-## Code of Conduct
+Example of request body:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+{
+	"MMSI": 247039300,
+	"MinTimestamp": 1372683960
+}
+```
 
-## Security Vulnerabilities
+## XML
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Send your GET request to http://localhost/api/ShipPosition
+2. Add an xml as request body
+3. Set Content-Type header = application/xml:
 
-## License
+Example of request body:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+<root>
+	<MMSI>247039300</MMSI>
+	<MinTimestamp>1372683960</MinTimestamp>
+</root>
+```
+
+## CSV
+
+1. Send your GET request to http://localhost/api/ShipPosition
+2. Add a csv as request body
+3. Set Content-Type header = text/csv:
+
+Example of request body:
+
+```
+MMSI,MinTimestamp
+247039300,1372683960
+```
