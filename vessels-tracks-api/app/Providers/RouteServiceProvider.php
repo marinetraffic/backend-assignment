@@ -37,4 +37,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+
+    /**
+     * Configure the rate limiters for the application.
+     *
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('global', function (Request $request) {
+            return Limit::perHour(10)->by($request->ip())->response(function() {
+                return response('You passed the limit of 10 requests per hour.', 429);
+            });
+        });
+    }
 }
