@@ -57,8 +57,7 @@ class PopulateDatabase extends Command
             //use chunking because of DBs like SQLITE
             DB::table("vessel_positions")->insert($chunk->all());
         }
-        // $this->info("Records count " . count($data));
-        // DB::table("vessel_positions")->insert($data);
+        
         $this->info("Records created successfully");
         return 0;
     }
