@@ -39,12 +39,24 @@ class VesselTrackingTest extends TestCase
         $response = $this->getJson("/api/v1/positions?time_interval={$time}");
 
         $response->assertOk()->assertJsonCount(1971, 'data');
-        // ->assertJsonFragment([
-        //     'mmsi' => "247039300",
-        //     'stationId' => "83",
-        //     'lat' => "43.81345",
-        //     'lon' => "14.36933",
-        //     'speed' => "157"
-        // ]);
+    }
+
+    public function testCanFilterWithLatitudeAndLongitude(){
+
+        $lat = "42.05627,41.57028";
+
+        $lon = "16.57032,16.25182";
+
+        $response = $this->getJson("/api/v1/positions?lat={$lat}&lon={$lon}")->dump();
+
+        $response->assertOk()->assertJsonFragment([
+            'mmsi' => "247039300",
+            'stationId' => "89",
+            'lat' => "41.98653",
+            'lon' => "16.25182",
+            'speed' => "157",
+            'course' => "149",
+            'timestamp' => "1372700340"
+        ]);
     }
 }

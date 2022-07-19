@@ -43,6 +43,24 @@ class TrackService{
             $model->whereBetween("timestamp", $time_range);
         }
 
+        if ($this->lat){
+            $lat_range = is_array($this->lat) ? $this->lat : explode(",", $this->lat);
+            if (count($lat_range) != 2){
+                throw new Exception("Lat value must contain exactly 2 values");
+            }
+            sort($lat_range);
+            $model->whereBetween("lat", $lat_range);
+        }
+
+        if ($this->lon) {
+            $lon_range = is_array($this->lon) ? $this->lon : explode(",", $this->lon);
+            if (count($lon_range) != 2) {
+                throw new Exception("Lon value must contain exactly 2 values");
+            }
+            sort($lon_range);
+            $model->whereBetween("lon", $lon_range);
+        }
+
         return $model;
     }
 }
