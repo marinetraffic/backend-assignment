@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::prefix('v1')->group(function(){
+Route::prefix('v1')->middleware(['throttle:api'])->group(function(){
     Route::get('/', function(){
         return response()->json([
             'status' => 'success',

@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'requests_allowed_per_hour' => 10,
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
