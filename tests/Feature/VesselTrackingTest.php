@@ -9,28 +9,17 @@ use Tests\TestCase;
 class VesselTrackingTest extends TestCase
 {
     public function testReturnsAllWithoutFilter(){
-        $response = $this->getJson("/api/v1/positions")->assertJsonCount(2696, 'data');
+        $response = $this->getJson("/api/v1/positions")->assertJsonCount(2696);
     }
 
-    public function testRespondsWithCsv(){
-        $mmsi = "247039300";
-
-        $response = $this->getJson("/api/v1/positions?mmsi={$mmsi}", [
-            'content-type' => 'text/csv',
-            'accept' => 'text/csv'
-        ]);
-
-        $response->assertOk()->assertHeader("content-type", "text/csv; charset=UTF-8");
-        
-    }
-
+    
     public function testCanFilterBySingleMmsi(){
         $mmsi = "247039300";
         
         $response = $this->getJson("/api/v1/positions?mmsi={$mmsi}");
 
         $response->assertOk();
-        $response->assertJsonCount(869, 'data');
+        $response->assertJsonCount(869);
     }
 
     public function testCanFilterByMultipleMmsi(){
@@ -38,7 +27,7 @@ class VesselTrackingTest extends TestCase
 
         $response = $this->getJson("/api/v1/positions?mmsi={$mmsi}");
 
-        $response->assertOk()->assertJsonCount(1836, 'data');
+        $response->assertOk()->assertJsonCount(1836);
     }
 
     public function testFailsWithSingleTimeIntervalFilterValue(){
@@ -54,7 +43,7 @@ class VesselTrackingTest extends TestCase
 
         $response = $this->getJson("/api/v1/positions?time_interval={$time}");
 
-        $response->assertOk()->assertJsonCount(1971, 'data');
+        $response->assertOk()->assertJsonCount(1971);
     }
 
     public function testCanFilterWithLatitudeAndLongitude(){
@@ -74,5 +63,28 @@ class VesselTrackingTest extends TestCase
             'course' => "149",
             'timestamp' => "1372700340"
         ]);
+    }
+
+    public function testRespondsWithCsv()
+    {
+        $mmsi = "247039300";
+
+        $response = $this->getJson("/api/v1/positions?mmsi={$mmsi}", [
+            'content-type' => 'text/csv',
+            'accept' => 'text/csv'
+        ]);
+
+        $response->assertOk()->assertHeader("content-type", "text/csv; charset=UTF-8");
+    }
+
+    public function testRespondsWithXml()
+    {
+        $mmsi = "247039300";
+
+        $response = $this->getJson("/api/v1/positions?mmsi={$mmsi}", [
+            'accept' => 'application/xml'
+        ]);
+
+        $response->assertOk()->assertHeader("content-type", "application/xml");
     }
 }
