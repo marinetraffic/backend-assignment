@@ -12,6 +12,18 @@ class VesselTrackingTest extends TestCase
         $response = $this->getJson("/api/v1/positions")->assertJsonCount(2696, 'data');
     }
 
+    public function testRespondsWithCsv(){
+        $mmsi = "247039300";
+
+        $response = $this->getJson("/api/v1/positions?mmsi={$mmsi}", [
+            'content-type' => 'text/csv',
+            'accept' => 'text/csv'
+        ]);
+
+        $response->assertOk()->assertHeader("content-type", "text/csv; charset=UTF-8");
+        
+    }
+
     public function testCanFilterBySingleMmsi(){
         $mmsi = "247039300";
         
