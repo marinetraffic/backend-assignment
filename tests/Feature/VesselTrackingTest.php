@@ -8,6 +8,10 @@ use Tests\TestCase;
 
 class VesselTrackingTest extends TestCase
 {
+    public function testReturnsAllWithoutFilter(){
+        $response = $this->getJson("/api/v1/positions")->assertJsonCount(2696, 'data');
+    }
+
     public function testCanFilterBySingleMmsi(){
         $mmsi = "247039300";
         
@@ -47,7 +51,7 @@ class VesselTrackingTest extends TestCase
 
         $lon = "16.57032,16.25182";
 
-        $response = $this->getJson("/api/v1/positions?lat={$lat}&lon={$lon}")->dump();
+        $response = $this->getJson("/api/v1/positions?lat={$lat}&lon={$lon}");
 
         $response->assertOk()->assertJsonFragment([
             'mmsi' => "247039300",
