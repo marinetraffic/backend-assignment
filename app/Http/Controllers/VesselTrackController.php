@@ -13,11 +13,5 @@ class VesselTrackController extends Controller
         $positions = $trackService->filter($vesselPosition)->latest()->get()->toArray();
 
         return ResponseManager::create($positions, $request->header("accept"));
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => "Tracks retrieved successfully",
-            'data' => $positions
-        ]);
     }
 }
